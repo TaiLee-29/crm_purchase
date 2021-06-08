@@ -37,13 +37,28 @@ class RbacController extends Controller
         $auth->addChild($author, $updateRequest);
         $auth->addChild($author, $deleteRequest);
 
+
+        $createPurchase = $auth->createPermission('createPurchase');
+        $createPurchase->description = 'Create a Purchase';
+        $auth->add($createPurchase);
+
+        $deletePurchase = $auth->createPermission('deletePurchase');
+        $deletePurchase->description = 'Delete Purchase';
+        $auth->add($deletePurchase);
+
+        // добавляем разрешение "updatePost"
+        $updatePurchase = $auth->createPermission('updatePurchase');
+        $updatePurchase->description = 'Update Request';
+        $auth->add($updatePurchase);
         // добавляем роль "admin" и даём роли разрешение "updatePost"
         // а также все разрешения роли "author"
         $admin = $auth->createRole('admin');
         $auth->add($admin);
-        $auth->addChild($admin, $updateRequest);
         $auth->addChild($admin, $author);
         $auth->addChild($admin, $changeRequestStatus);
+        $auth->addChild($admin, $createPurchase);
+        $auth->addChild($admin, $updatePurchase);
+        $auth->addChild($admin, $deletePurchase);
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
