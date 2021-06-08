@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -60,7 +61,9 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    {
+    { if (!\Yii::$app->user->can('deleteRequest')) {
+        throw new ForbiddenHttpException('Access denied');
+    }
         return $this->render('index');
     }
 

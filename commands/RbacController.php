@@ -11,27 +11,39 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
 
+        $auth->removeAll();
         // добавляем разрешение "createPost"
-        $createPost = $auth->createPermission('createPost');
-        $createPost->description = 'Create a post';
-        $auth->add($createPost);
+        $createRequest = $auth->createPermission('createRequest');
+        $createRequest->description = 'Create a Request';
+        $auth->add($createRequest);
+
+        $deleteRequest = $auth->createPermission('deleteRequest');
+        $deleteRequest->description = 'Delete Request';
+        $auth->add($deleteRequest);
 
         // добавляем разрешение "updatePost"
-        $updatePost = $auth->createPermission('updatePost');
-        $updatePost->description = 'Update post';
-        $auth->add($updatePost);
+        $updateRequest = $auth->createPermission('updateRequest');
+        $updateRequest->description = 'Update Request';
+        $auth->add($updateRequest);
+
+        $changeRequestStatus = $auth->createPermission('changeRequestStatus');
+        $changeRequestStatus->description = 'Change Request Status';
+        $auth->add($changeRequestStatus);
 
         // добавляем роль "author" и даём роли разрешение "createPost"
         $author = $auth->createRole('author');
         $auth->add($author);
-        $auth->addChild($author, $createPost);
+        $auth->addChild($author, $createRequest);
+        $auth->addChild($author, $updateRequest);
+        $auth->addChild($author, $deleteRequest);
 
         // добавляем роль "admin" и даём роли разрешение "updatePost"
         // а также все разрешения роли "author"
         $admin = $auth->createRole('admin');
         $auth->add($admin);
-        $auth->addChild($admin, $updatePost);
+        $auth->addChild($admin, $updateRequest);
         $auth->addChild($admin, $author);
+        $auth->addChild($admin, $changeRequestStatus);
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
