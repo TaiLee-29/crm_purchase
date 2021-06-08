@@ -1,54 +1,41 @@
 <?php
 
-namespace app\commands\RbacController;
+namespace app\commands;
 
 use Yii;
 use yii\console\Controller;
-/**
- * Инициализатор RBAC выполняется в консоли php yii my-rbac/init
- */
-class MyRbacController extends Controller {
 
-    public function actionInit() {
+class RbacController extends Controller
+{
+    public function actionInit()
+    {
         $auth = Yii::$app->authManager;
 
-        $auth->removeAll(); //На всякий случай удаляем старые данные из БД...
+        // добавляем разрешение "createPost"
+        $createPost = $auth->createPermission('createPost');
+        $createPost->description = 'Create a post';
+        $auth->add($createPost);
 
-        // Создадим роли админа и редактора новостей
+        // добавляем разрешение "updatePost"
+        $updatePost = $auth->createPermission('updatePost');
+        $updatePost->description = 'Update post';
+        $auth->add($updatePost);
+
+        // добавляем роль "author" и даём роли разрешение "createPost"
+        $author = $auth->createRole('author');
+        $auth->add($author);
+        $auth->addChild($author, $createPost);
+
+        // добавляем роль "admin" и даём роли разрешение "updatePost"
+        // а также все разрешения роли "author"
         $admin = $auth->createRole('admin');
-        $user = $auth->createRole('user');
-
-        // запишем их в БД
         $auth->add($admin);
-        $auth->add($user);
+        $auth->addChild($admin, $updatePost);
+        $auth->addChild($admin, $author);
 
-        // Создаем разрешения. Например, просмотр админки viewAdminPage и редактирование новости updateNews
-        $viewRequests = $auth->createPermission('viewRequests');
-        $viewRequests->description = 'View all requests';
-
-        $createRequests = $auth->createPermission('createRequests');
-        $createRequests->description = 'Create new request';
-
-        // Запишем эти разрешения в БД
-        $auth->add($viewRequests);
-        $auth->add($createRequests);
-
-        // Теперь добавим наследования. Для роли user мы добавим разрешение updateNews,
-        // а для админа добавим наследование от роли editor и еще добавим собственное разрешение viewAdminPage
-
-        // Роли «Редактор новостей» присваиваем разрешение «Редактирование новости»
-        $auth->addChild($user,$createRequests);
-
-        // админ наследует роль редактора новостей. Он же админ, должен уметь всё! :D
-        $auth->addChild($admin, $user);
-
-        // Еще админ имеет собственное разрешение - «Просмотр админки»
-        $auth->addChild($admin, $viewRequests);
-
-        // Назначаем роль admin пользователю с ID 1
+        // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
+        // обычно реализуемый в модели User.
+        $auth->assign($author, 2);
         $auth->assign($admin, 1);
-
-        // Назначаем роль editor пользователю с ID 2
-        $auth->assign($user, 2);
     }
 }
