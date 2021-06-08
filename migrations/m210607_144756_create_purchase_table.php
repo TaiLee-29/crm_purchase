@@ -35,6 +35,10 @@ class m210607_144756_create_purchase_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey(
+            'fk-purchase-request_id',
+            '{{%purchase}}'
+        );
         $this->dropTable('{{%purchase}}');
     }
 }
