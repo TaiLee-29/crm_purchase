@@ -18,7 +18,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
+            'class' => 'yii\rbac\DbManager',
         ],
         'log' => [
             'targets' => [
@@ -31,13 +31,20 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
+
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
+        'migrate' => [
+            'class' => \yii\console\controllers\MigrateController::class,
+            'migrationPath' => [
+                '@app/migrations',
+                '@yii/rbac/migrations'
+            ]
+        ]
     ],
-    */
+
 ];
 
 if (YII_ENV_DEV) {
