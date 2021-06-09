@@ -11,6 +11,27 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 
 AppAsset::register($this);
+$items = [['label' => 'Home', 'url' => ['/site/index']],
+    ['label' => 'Contact', 'url' => ['/site/contact']],
+    ['label' => 'Requests', 'url' => ['/request/index']],
+    ['label' => 'Purchases', 'url' => ['/request/index']]
+    ];
+if (Yii::$app->user->isGuest){
+    $items[]=['label' => 'Login', 'url' => ['/site/login'] ];
+    $items[]=['label' => 'Login', 'url' => ['/site/login'] ];
+}else{
+    $items[]=(
+        '<li>'
+        . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+        . Html::submitButton(
+            'Logout (' . Yii::$app->user->identity->username . ')',
+            ['class' => 'btn btn-link logout']
+        )
+        . Html::endForm()
+        . '</li>'
+    );
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -36,23 +57,25 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Requests', 'url' => ['/request/index']],
-            ['label' => 'Purchases', 'url' => ['/purchase/index']],
-            ['label' => 'Users', 'url' => ['/user/index']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => $items,
+//        'items' => [
+//            ['label' => 'Home', 'url' => ['/site/index']],
+//            ['label' => 'Contact', 'url' => ['/site/contact']],
+//            ['label' => 'Requests', 'url' => ['/request/index']],
+//            ['label' => 'Purchases', 'url' => ['/request/index']],
+//            Yii::$app->user->isGuest ? (
+//                ['label' => 'Login', 'url' => ['/site/login'] ]
+//            ) : (
+//                '<li>'
+//                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+//                . Html::submitButton(
+//                    'Logout (' . Yii::$app->user->identity->username . ')',
+//                    ['class' => 'btn btn-link logout']
+//                )
+//                . Html::endForm()
+//                . '</li>'
+//            )
+//        ],
     ]);
     NavBar::end();
     ?>

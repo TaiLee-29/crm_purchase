@@ -65,8 +65,7 @@ class PurchaseSearch extends Purchase
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
