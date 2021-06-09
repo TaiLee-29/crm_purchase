@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -125,5 +126,18 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionRegister(){
+        if (!Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+        $model = new User();
+        if ($model->load(Yii::$app->request->post())){
+            $model->setPassword($model->password);
+            $model->generateAuthKey();
+            $model->save();
+            \Yii::$app->session->setFlash('success', "You have signed up successfully. Please login.");
+            return $this->render('singup', ['model'=>$model]);
+        }
     }
 }
