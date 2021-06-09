@@ -61,9 +61,7 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    { /*if (!\Yii::$app->user->can('deleteRequest')) {
-        throw new ForbiddenHttpException('Access denied');
-    }*/
+    {
         return $this->render('index');
     }
 

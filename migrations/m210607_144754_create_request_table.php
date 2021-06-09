@@ -23,7 +23,7 @@ class m210607_144754_create_request_table extends Migration
             'fk-request-created_by',
             '{{%request}}',
             'created_by',
-            '{{%users}}',
+            '{{%user}}',
             'id',
             'CASCADE'
         );

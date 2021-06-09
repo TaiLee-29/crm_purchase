@@ -4,7 +4,11 @@ namespace app\controllers;
 
 use app\models\Request;
 use app\models\RequestSearch;
+use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -26,6 +30,12 @@ class RequestController extends Controller
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                [
+                    'class' => TimestampBehavior::className(),
+                    'createdAtAttribute' => 'created_at',
+                    'updatedAtAttribute' => false,
+                    'value' => new Expression('NOW()'),
                 ],
             ]
         );
@@ -65,10 +75,13 @@ class RequestController extends Controller
      * @return mixed
      */
     public function actionCreate()
-    {
+    {  /*if (!\Yii::$app->user->can('createRequest')) {
+        throw new ForbiddenHttpException('Access denied');
+    }*/
         $model = new Request();
 
         if ($this->request->isPost) {
+           // var_dump($this->request);
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

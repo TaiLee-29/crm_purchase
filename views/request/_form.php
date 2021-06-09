@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList([ 'new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+<!-- --><?/*= // $form->field($model, 'created_at')->textInput() // */?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
