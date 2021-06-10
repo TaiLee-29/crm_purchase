@@ -4,13 +4,13 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-
+use yii\helpers\Url;
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
-
+    public $id;
     public $username;
     public $email;
     public $password;
@@ -38,7 +38,7 @@ class SignupForm extends Model
     /**
      * Signs user up.
      *
-     * @return User|null the saved model or null if saving fails
+     * @return string the saved model or null if saving fails
      */
     public function signup()
     {
@@ -52,7 +52,11 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        return $user->save() ? $user : null;
+        $user->save();
+//        $auth = Yii::$app->authManager;
+//        $role = $auth->getRole('user');
+//        $auth->assign($role, $user->id);
+        return  \yii\helpers\Url::to(['user/view']);
     }
 
 }

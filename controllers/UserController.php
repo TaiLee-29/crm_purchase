@@ -82,11 +82,9 @@ class UserController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-
                     $auth = Yii::$app->authManager;
                     $role = $auth->getRole('user');
                     $auth->assign($role, $model->id);
-
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

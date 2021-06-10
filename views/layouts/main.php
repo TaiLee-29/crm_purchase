@@ -14,11 +14,12 @@ AppAsset::register($this);
 $items = [['label' => 'Home', 'url' => ['/site/index']],
     ['label' => 'Contact', 'url' => ['/site/contact']],
     ['label' => 'Requests', 'url' => ['/request/index']],
-    ['label' => 'Purchases', 'url' => ['/request/index']]
+    ['label' => 'Purchases', 'url' => ['/purchase/index']],
+    ['label' => 'Users', 'url' => ['/user/index']]
     ];
 if (Yii::$app->user->isGuest){
     $items[]=['label' => 'Login', 'url' => ['/site/login'] ];
-    $items[]=['label' => 'Login', 'url' => ['/site/login'] ];
+    $items[]=['label' => 'Signup', 'url' => ['/site/signup'] ];
 }else{
     $items[]=(
         '<li>'

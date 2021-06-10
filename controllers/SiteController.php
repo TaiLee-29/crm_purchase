@@ -15,6 +15,7 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -143,14 +144,16 @@ class SiteController extends Controller
             }
         }
     }
+
+
     public function actionSignup()
     {
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                if (Yii::$app->getUser()) {
+                    return $this->redirect(['/user/index']);
                 }
             }
         }
