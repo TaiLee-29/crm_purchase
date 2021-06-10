@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Purchase;
 use app\models\PurchaseSearch;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +29,12 @@ class PurchaseController extends Controller
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                [
+                    'class' => TimestampBehavior::className(),
+                    'createdAtAttribute' => 'created_at',
+                    'updatedAtAttribute' => false,
+                    'value' => new Expression('NOW()'),
                 ],
             ]
         );

@@ -34,11 +34,11 @@ class Request extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'required'],
+            [['description', 'name'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
             [['created_at'], 'safe'],
-            [['description'], 'string', 'max' => 255],
+            [['description', 'name'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
@@ -50,6 +50,7 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'name' => 'Name',
             'description' => 'Description',
             'created_by' => 'Created By',
             'status' => 'Status',

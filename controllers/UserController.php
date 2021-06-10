@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\User;
 use app\models\UserSearch;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -125,7 +126,9 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+
+            $this->findModel($id)->delete();
+
 
         return $this->redirect(['index']);
     }

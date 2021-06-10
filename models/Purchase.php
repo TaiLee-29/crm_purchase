@@ -35,7 +35,7 @@ class Purchase extends \yii\db\ActiveRecord
             [['description', 'name', 'price'], 'required'],
             [['price'], 'number'],
             [['request_id'], 'integer'],
-            [['description', 'name', 'status'], 'string', 'max' => 255],
+            [['description', 'name'], 'string', 'max' => 255],
             [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::className(), 'targetAttribute' => ['request_id' => 'id']],
         ];
     }
@@ -50,8 +50,7 @@ class Purchase extends \yii\db\ActiveRecord
             'description' => 'Description',
             'name' => 'Name',
             'price' => 'Price',
-            'request_id' => 'Request ID',
-            'status' => 'Status',
+            'request_id' => 'Request ID'
         ];
     }
 
