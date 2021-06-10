@@ -108,7 +108,17 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost ) {
+            if(iconv_strlen($this->request->post()['User']['password'])<1){
+                $model->username = $this->request->post()['User']['username'];
+                $model->email = $this->request->post()['User']['email'];
+                $model->save();
+            } else{
+                $model->username = $this->request->post()['User']['username'];
+                $model->email = $this->request->post()['User']['email'];
+                $model->setPassword($this->request->post()['User']['password']);
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

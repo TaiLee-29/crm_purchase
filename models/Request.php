@@ -20,6 +20,11 @@ use Yii;
  */
 class Request extends \yii\db\ActiveRecord
 {
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED= 'accepted';
+    const STATUS_DECLINED = 'declined';
+
     /**
      * {@inheritdoc}
      */

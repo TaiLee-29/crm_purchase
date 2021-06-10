@@ -2,11 +2,17 @@
 
 namespace app\commands;
 
+use app\models\User;
 use Yii;
+use yii\base\BaseObject;
 use yii\console\Controller;
 
 class RbacController extends Controller
 {
+    /**
+     * @throws \yii\base\Exception
+     * @throws \Exception
+     */
     public function actionInit()
     {
         $auth = Yii::$app->authManager;
@@ -31,11 +37,11 @@ class RbacController extends Controller
         $auth->add($changeRequestStatus);
 
         // добавляем роль "author" и даём роли разрешение "createPost"
-        $author = $auth->createRole('author');
-        $auth->add($author);
-        $auth->addChild($author, $createRequest);
-        $auth->addChild($author, $updateRequest);
-        $auth->addChild($author, $deleteRequest);
+        $user = $auth->createRole('user');
+        $auth->add($user);
+        $auth->addChild($user, $createRequest);
+        $auth->addChild($user, $updateRequest);
+        $auth->addChild($user, $deleteRequest);
 
 
         $createPurchase = $auth->createPermission('createPurchase');
@@ -54,7 +60,8 @@ class RbacController extends Controller
         // а также все разрешения роли "author"
         $admin = $auth->createRole('admin');
         $auth->add($admin);
-        $auth->addChild($admin, $author);
+        $auth->addChild($admin, $createRequest);
+        $auth->addChild($admin, $updateRequest);
         $auth->addChild($admin, $changeRequestStatus);
         $auth->addChild($admin, $createPurchase);
         $auth->addChild($admin, $updatePurchase);
@@ -62,7 +69,12 @@ class RbacController extends Controller
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
-        $auth->assign($author, 2);
-        $auth->assign($admin, 1);
+        $model = new User();
+        $model->username = 'admin';
+        $model->email = 'admin@gmail.com';
+        $model->setPassword('admin123');
+        $model->generateAuthKey();
+        $model->save();
+        $auth->assign($admin, $model->getId());
     }
 }

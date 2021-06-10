@@ -133,14 +133,15 @@ class SiteController extends Controller
     {
         $model = User::find()->where(['username' => 'admin'])->one();
         if (empty($model)) {
-            $user = new User();
-            $user->username = 'admin';
-            $user->email = 'admin@gmail.com';
-            $user->setPassword('admin123');
-            $user->generateAuthKey();
-            if ($user->save()) {
+            $model = new User();
+            $model->username = 'admin';
+            $model->email = 'admin@gmail.com';
+            $model->setPassword('admin123');
+            $model->generateAuthKey();
+            $model->save();
+            if ($model->save()) {
                 return $this->render('login', [
-                    'model' => $model,]);
+                    'user' => $model,]);
             }
         }
     }
@@ -150,12 +151,8 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()) {
-                    return $this->redirect(['/user/index']);
-                }
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            return $this->redirect(['/user/index']);
         }
 
         return $this->render('signup', [

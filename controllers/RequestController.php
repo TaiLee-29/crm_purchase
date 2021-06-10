@@ -8,7 +8,6 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -81,8 +80,10 @@ class RequestController extends Controller
         $model = new Request();
 
         if ($this->request->isPost) {
-           // var_dump($this->request);
             if ($model->load($this->request->post()) && $model->save()) {
+                $model->created_by = Yii::$app->user->getId();
+                $model->status = Request::STATUS_NEW;
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -104,14 +105,31 @@ class RequestController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($this->request->isPost) {
+            if (Yii::$app->user->can('admin')) {
+                if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                    if (Yii::$app->user->can('changeRequestStatus')) {
+                        $model->status = $this->request->post()['Request']['status'];
+                        $model->save();
+                    }
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+            if (Yii::$app->user->getId() == $model->created_by) {
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                return $this->redirect(['index']);
+            }
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
+
     }
 
     /**
@@ -123,7 +141,13 @@ class RequestController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->user->can('deleteRequest')) {
+            $model = $this->findModel($id);
+            if (Yii::$app->user->getId() != $model->created_by) {
+                $model->delete();
+                return $this->redirect(['index']);
+            }
+        }
 
         return $this->redirect(['index']);
     }

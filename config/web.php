@@ -20,7 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
+            'class' => yii\rbac\DbManager::class,
 //            'defaultRoles' => ['admin', 'user'],
         ],
         'user' => [
