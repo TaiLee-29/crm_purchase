@@ -6,6 +6,8 @@ use app\models\query\UserQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "{{%user}}".
@@ -28,10 +30,17 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public $password;
 
+
+
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
     public function rules()

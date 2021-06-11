@@ -14,11 +14,11 @@ class m210607_144754_create_request_table extends Migration
     {
         $this->createTable('{{%request}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
             'created_by' => $this->integer(),
             'status' => 'ENUM("new", "pending", "accepted", "declined") NOT NULL DEFAULT "new"',
             'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ]);
         $this->addForeignKey(
             'fk-request-created_by',

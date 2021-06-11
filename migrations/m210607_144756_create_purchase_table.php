@@ -18,7 +18,6 @@ class m210607_144756_create_purchase_table extends Migration
             'name' => $this->string()->notNull(),
             'price' => $this->float()->notNull(),
             'request_id' => $this->integer(),
-            'created_at' => $this->dateTime()
         ]);
         $this->addForeignKey(
             'fk-purchase-request_id',

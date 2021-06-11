@@ -5,6 +5,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "request".
@@ -33,17 +35,29 @@ class Request extends \yii\db\ActiveRecord
         return '{{%request}}';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['description', 'name'], 'required'],
+            [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
             [['created_at'], 'safe'],
-            [['description', 'name'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
@@ -82,4 +96,5 @@ class Request extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Purchase::className(), ['request_id' => 'id']);
     }
+
 }
