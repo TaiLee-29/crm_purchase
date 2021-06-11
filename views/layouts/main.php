@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\assets\AppAsset;
@@ -15,15 +16,15 @@ $items = [['label' => 'Home', 'url' => ['/site/index']],
     ['label' => 'Contact', 'url' => ['/site/contact']],
     ['label' => 'Requests', 'url' => ['/request/index']],
 
-    ];
+];
 if (Yii::$app->getUser()->can('admin')) {
     $items[] = ['label' => 'Users', 'url' => ['/user/index']];
     $items[] = ['label' => 'Purchases', 'url' => ['/purchase/index']];
 }
-if (Yii::$app->user->isGuest){
-    $items[]=['label' => 'Login', 'url' => ['/site/login'] ];
-}else{
-    $items[]=(
+if (Yii::$app->user->isGuest) {
+    $items[] = ['label' => 'Login', 'url' => ['/site/login']];
+} else {
+    $items[] = (
         '<li>'
         . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
         . Html::submitButton(

@@ -12,12 +12,12 @@ use yii\db\Expression;
 /**
  * This is the model class for table "{{%user}}".
  *
- * @property int       $id
- * @property string    $username
- * @property string    $auth_key
- * @property string    $password_hash
- * @property string    $password_reset_token
- * @property string    $email
+ * @property int $id
+ * @property string $username
+ * @property string $auth_key
+ * @property string $password_hash
+ * @property string $password_reset_token
+ * @property string $email
  */
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -31,7 +31,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public $password;
 
 
-
     public function behaviors()
     {
         return [
@@ -43,6 +42,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             ],
         ];
     }
+
     public function rules()
     {
         return [
@@ -87,7 +87,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return static::find()->where(['username' => $username])->one();
     }
-
 
 
     /**

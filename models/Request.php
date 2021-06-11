@@ -64,7 +64,7 @@ class Request extends \yii\db\ActiveRecord
             [['status'], 'string'],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
 
@@ -90,7 +90,7 @@ class Request extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**

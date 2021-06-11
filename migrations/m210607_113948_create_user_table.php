@@ -7,9 +7,10 @@ use yii\db\Migration;
  */
 class m210607_113948_create_user_table extends Migration
 {
-    public function up(){
+    public function up()
+    {
         $this->createTable('{{%user}}', [
-           'id' => $this->primaryKey(),
+            'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
@@ -20,6 +21,7 @@ class m210607_113948_create_user_table extends Migration
             'updated_at' => $this->dateTime(),
         ]);
     }
+
     public function down()
     {
         $this->dropTable('{{%user}}');

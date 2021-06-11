@@ -38,7 +38,7 @@ class Purchase extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['request_id'], 'integer'],
             [['description', 'name'], 'string', 'max' => 255],
-            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::className(), 'targetAttribute' => ['request_id' => 'id']],
+            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::class, 'targetAttribute' => ['request_id' => 'id']],
         ];
     }
 
@@ -63,6 +63,6 @@ class Purchase extends \yii\db\ActiveRecord
      */
     public function getRequest()
     {
-        return $this->hasOne(Request::className(), ['id' => 'request_id']);
+        return $this->hasOne(Request::class, ['id' => 'request_id']);
     }
 }

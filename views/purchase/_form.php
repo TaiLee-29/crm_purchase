@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'request_id')->dropDownList($requestList);?>
+    <?= $form->field($model, 'request_id')->dropDownList($requestList); ?>
 
 
     <div class="form-group">

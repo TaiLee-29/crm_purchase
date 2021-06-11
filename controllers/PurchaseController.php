@@ -112,7 +112,7 @@ class PurchaseController extends Controller
             $model->loadDefaultValues();
         }
 
-        $requestList = ArrayHelper::map(Request::find()->all(),'id','id');
+        $requestList = ArrayHelper::map(Request::find()->all(), 'id', 'id');
 
         return $this->render('create', [
             'model' => $model,

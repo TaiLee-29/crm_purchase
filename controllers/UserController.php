@@ -75,6 +75,7 @@ class UserController extends Controller
             ['email', 'email'],
         ];
     }
+
     /**
      * Lists all User models.
      * @return mixed
@@ -115,9 +116,9 @@ class UserController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                    $auth = Yii::$app->authManager;
-                    $role = $auth->getRole('user');
-                    $auth->assign($role, $model->id);
+                $auth = Yii::$app->authManager;
+                $role = $auth->getRole('user');
+                $auth->assign($role, $model->id);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -140,12 +141,12 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost ) {
-            if(iconv_strlen($this->request->post()['User']['password'])<1){
+        if ($this->request->isPost) {
+            if (iconv_strlen($this->request->post()['User']['password']) < 1) {
                 $model->username = $this->request->post()['User']['username'];
                 $model->email = $this->request->post()['User']['email'];
                 $model->save();
-            } else{
+            } else {
                 $model->username = $this->request->post()['User']['username'];
                 $model->email = $this->request->post()['User']['email'];
                 $model->setPassword($this->request->post()['User']['password']);
@@ -169,7 +170,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
 
-            $this->findModel($id)->delete();
+        $this->findModel($id)->delete();
 
 
         return $this->redirect(['index']);

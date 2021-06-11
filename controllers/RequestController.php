@@ -135,10 +135,11 @@ class RequestController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
         if ($this->request->isPost) {
             if (Yii::$app->user->can('admin')) {
-                if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                if ($model->load($this->request->post()) && $model->save()) {
                     if (Yii::$app->user->can('changeRequestStatus')) {
                         $model->status = $this->request->post()['Request']['status'];
                         $model->save();
@@ -150,7 +151,6 @@ class RequestController extends Controller
                 ]);
             }
             if (Yii::$app->user->getId() == $model->created_by) {
-
                 if ($model->load($this->request->post()) && $model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
@@ -160,6 +160,7 @@ class RequestController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+
 
     }
 
