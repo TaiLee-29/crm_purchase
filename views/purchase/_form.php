@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Purchase */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $requestList array */
 ?>
 
 <div class="purchase-form">
@@ -18,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'request_id')->textInput() ?>
+    <?= $form->field($model, 'request_id')->dropDownList($requestList);?>
 
 
     <div class="form-group">

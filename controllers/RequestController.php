@@ -7,6 +7,7 @@ use app\models\RequestSearch;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,36 @@ class RequestController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -36,6 +67,7 @@ class RequestController extends Controller
                     'updatedAtAttribute' => false,
                     'value' => new Expression('NOW()'),
                 ],
+
             ]
         );
     }
@@ -81,7 +113,6 @@ class RequestController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->created_by = Yii::$app->user->getId();
                 $model->status = Request::STATUS_NEW;
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -143,7 +174,7 @@ class RequestController extends Controller
     {
         if (Yii::$app->user->can('deleteRequest')) {
             $model = $this->findModel($id);
-            if (Yii::$app->user->getId() != $model->created_by) {
+            if (Yii::$app->user->getId() == $model->created_by) {
                 $model->delete();
                 return $this->redirect(['index']);
             }

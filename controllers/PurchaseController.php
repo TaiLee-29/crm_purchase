@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\models\Purchase;
 use app\models\PurchaseSearch;
+use app\models\Request;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,17 +27,41 @@ class PurchaseController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
-                ],
-                [
-                    'class' => TimestampBehavior::className(),
-                    'createdAtAttribute' => 'created_at',
-                    'updatedAtAttribute' => false,
-                    'value' => new Expression('NOW()'),
                 ],
             ]
         );
@@ -85,8 +112,11 @@ class PurchaseController extends Controller
             $model->loadDefaultValues();
         }
 
+        $requestList = ArrayHelper::map(Request::find()->all(),'id','id');
+
         return $this->render('create', [
             'model' => $model,
+            'requestList' => $requestList
         ]);
     }
 

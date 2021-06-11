@@ -5,6 +5,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
@@ -44,6 +45,11 @@ class Request extends \yii\db\ActiveRecord
                 'updatedAtAttribute' => 'updated_at',
                 'value' => new Expression('NOW()'),
             ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => false
+            ]
         ];
     }
 
@@ -94,7 +100,7 @@ class Request extends \yii\db\ActiveRecord
      */
     public function getPurchases()
     {
-        return $this->hasMany(Purchase::className(), ['request_id' => 'id']);
+        return $this->hasMany(Purchase::class, ['request_id' => 'id']);
     }
 
 }
