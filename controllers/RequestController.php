@@ -126,7 +126,7 @@ class RequestController extends Controller
                 $fileStream = fopen($file->tempName, 'r+');
                 //$filesystem->write('/local', $fileStream);
                 $filesystem->writeStream('local/'.$path, $fileStream, ['mimeType' => $file->type]);
-                //
+                $model->imageFiles[] = 'local/'.$path;
             }
             if ($model->load($this->request->post()) && $model->save(false)) {
                 $model->status = Request::STATUS_NEW;
