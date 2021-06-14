@@ -121,11 +121,12 @@ class RequestController extends Controller
         if ($this->request->isPost) {
             $files = $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             $filesystem = FilesystemAdapter::adapter();
-
             foreach ($files as $file){
+                $path = time().".".$file->extension;
                 $fileStream = fopen($file->tempName, 'r+');
                 //$filesystem->write('/local', $fileStream);
-                $filesystem->writeStream('local/'.time().".".$file->extension, $fileStream, ['mimeType' => $file->type]);
+                $filesystem->writeStream('local/'.$path, $fileStream, ['mimeType' => $file->type]);
+                //
             }
             if ($model->load($this->request->post()) && $model->save(false)) {
                 $model->status = Request::STATUS_NEW;
