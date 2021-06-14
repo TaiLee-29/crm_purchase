@@ -28,6 +28,7 @@ class Request extends \yii\db\ActiveRecord
     const STATUS_ACCEPTED= 'accepted';
     const STATUS_DECLINED = 'declined';
 
+    public $imageFiles;
     /**
      * {@inheritdoc}
      */
@@ -62,6 +63,7 @@ class Request extends \yii\db\ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
@@ -80,6 +82,7 @@ class Request extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'status' => 'Status',
             'created_at' => 'Created At',
+            'imageFiles' => 'Image Files'
         ];
     }
 

@@ -132,12 +132,12 @@ class SiteController extends Controller
 
     public function actionAddAdmin()
     {
-        $model = User::find()->where(['username' => 'admin'])->one();
+        $model = User::find()->where(['username' => 'admin2'])->one();
         if (empty($model)) {
             $model = new User();
-            $model->username = 'admin';
-            $model->email = 'admin@gmail.com';
-            $model->setPassword('admin123');
+            $model->username = 'admin2';
+            $model->email = 'admin2@gmail.com';
+            $model->setPassword('admin2123');
             $model->generateAuthKey();
             $model->save();
             if ($model->save()) {

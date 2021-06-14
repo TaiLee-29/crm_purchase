@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\adapters\FilesystemAdapter;
 use app\models\Request;
 use app\models\RequestSearch;
 use Yii;
@@ -11,12 +12,16 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 
 /**
  * RequestController implements the CRUD actions for Request model.
  */
 class RequestController extends Controller
 {
+
     /**
      * @inheritDoc
      */
@@ -104,17 +109,28 @@ class RequestController extends Controller
      * Creates a new Request model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \League\Flysystem\FilesystemException
      */
     public function actionCreate()
     {  /*if (!\Yii::$app->user->can('createRequest')) {
         throw new ForbiddenHttpException('Access denied');
     }*/
+
         $model = new Request();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $files = $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+            $filesystem = FilesystemAdapter::adapter();
+
+            foreach ($files as $file){
+                $fileStream = fopen($file->tempName, 'r+');
+                //$filesystem->write('/local', $fileStream);
+                $filesystem->writeStream('local/'.time().".".$file->extension, $fileStream, ['mimeType' => $file->type]);
+            }
+            if ($model->load($this->request->post()) && $model->save(false)) {
                 $model->status = Request::STATUS_NEW;
                 $model->save();
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
