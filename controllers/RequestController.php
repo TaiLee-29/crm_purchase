@@ -118,27 +118,27 @@ class RequestController extends Controller
     }*/
         $model = new Request();
         if ($this->request->isPost) {
-            if (($answerItemsData = Yii::$app->getRequest()->getBodyParam('Request')) !== null) {
-                if ($model->load($answerItemsData) && $model->save(false)) {
-                    $filesystem = FilesystemAdapter::adapter();
-                    $files = UploadedFile::getInstances($model, 'imageFiles');
-                    foreach ($files as $file) {
-                        $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
-                        $fileStream = fopen($file->tempName, 'r+');
-                        $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
-                        $model->imageFiles = 'app/web/local/' . $path;
-                        $model->status = Request::STATUS_NEW;
-                        if (Yii::$app->user->can('changeRequestStatus')) {
-                            $model->status = $this->request->post()['Request']['status'];
-                        }
-                        $model->save();
-                    }
+             var_dump(Yii::$app->getRequest()->getBodyParam('Request'));
+            if ($model->load(Yii::$app->getRequest()->getBodyParam('Request')) && $model->save(false)) {
+                $filesystem = FilesystemAdapter::adapter();
+                $files = UploadedFile::getInstances($model, 'imageFiles');
+                foreach ($files as $file) {
+                    $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
+                    $fileStream = fopen($file->tempName, 'r+');
+                    $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
+                    $model->imageFiles = 'app/web/local/' . $path;
+                    $model->description =$this->request->post('description');
                 }
-                return $this->redirect(['view', 'id' => $model->id]);
-
-            } else {
-                $model->loadDefaultValues();
+                $model->status = Request::STATUS_NEW;
+                if (Yii::$app->user->can('changeRequestStatus')) {
+                    $model->status = $this->request->post()['Request']['status'];
+                }
+                $model->save();
             }
+            return $this->redirect(['view', 'id' => $model->id]);
+
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [

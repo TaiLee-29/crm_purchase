@@ -17,7 +17,6 @@ use yii\db\Expression;
  * @property int|null $created_by
  * @property string $status
  * @property string $imageFiles
- * @property array[] $answerItems
  * @property string|null $created_at
  *
  * @property User $createdBy
@@ -65,7 +64,6 @@ class Request extends \yii\db\ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
-            [['answerItems'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
             [['imageFiles'],'string'],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
