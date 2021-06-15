@@ -9,6 +9,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -115,27 +116,29 @@ class RequestController extends Controller
     {  /*if (!\Yii::$app->user->can('createRequest')) {
         throw new ForbiddenHttpException('Access denied');
     }*/
-
         $model = new Request();
-
         if ($this->request->isPost) {
-            $files = $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-            $filesystem = FilesystemAdapter::adapter();
-            foreach ($files as $file){
-                $path = time().".".$file->extension;
-                $fileStream = fopen($file->tempName, 'r+');
-                //$filesystem->write('/local', $fileStream);
-                $filesystem->writeStream('local/'.$path, $fileStream, ['mimeType' => $file->type]);
-                $model->imageFiles[] = 'local/'.$path;
-            }
-            if ($model->load($this->request->post()) && $model->save(false)) {
-                $model->status = Request::STATUS_NEW;
-                $model->save();
-
+            if (($answerItemsData = Yii::$app->getRequest()->getBodyParam('Request')) !== null) {
+                if ($model->load($answerItemsData) && $model->save(false)) {
+                    $filesystem = FilesystemAdapter::adapter();
+                    $files = UploadedFile::getInstances($model, 'imageFiles');
+                    foreach ($files as $file) {
+                        $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
+                        $fileStream = fopen($file->tempName, 'r+');
+                        $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
+                        $model->imageFiles = 'app/web/local/' . $path;
+                        $model->status = Request::STATUS_NEW;
+                        if (Yii::$app->user->can('changeRequestStatus')) {
+                            $model->status = $this->request->post()['Request']['status'];
+                        }
+                        $model->save();
+                    }
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
+
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [

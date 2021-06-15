@@ -16,6 +16,8 @@ use yii\db\Expression;
  * @property string $description
  * @property int|null $created_by
  * @property string $status
+ * @property string $imageFiles
+ * @property array[] $answerItems
  * @property string|null $created_at
  *
  * @property User $createdBy
@@ -28,7 +30,7 @@ class Request extends \yii\db\ActiveRecord
     const STATUS_ACCEPTED= 'accepted';
     const STATUS_DECLINED = 'declined';
 
-    public $imageFiles;
+
     /**
      * {@inheritdoc}
      */
@@ -63,7 +65,8 @@ class Request extends \yii\db\ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
-            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
+            [['answerItems'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
+            [['imageFiles'],'string'],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],

@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
         echo $form->field($model, 'status')->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => '']);
     } ?>
     <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true,'accept' => '*']) ?>
+<!--    --><?//= $form->field($model, 'imageFiles')->fileInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
