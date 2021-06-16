@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
+use yii\web\UrlManager;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -99,10 +100,16 @@ class RequestController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id, UrlManager $urlManager)
     {
+        $model=$this->findModel($id);
+        $images = json_decode($model->images_path);
+       // var_dump($images);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'images' => $images,
+
+
         ]);
     }
 
@@ -118,29 +125,29 @@ class RequestController extends Controller
     }*/
         $model = new Request();
         if ($this->request->isPost) {
-             var_dump(Yii::$app->getRequest()->getBodyParam('Request'));
-            if ($model->load(Yii::$app->getRequest()->getBodyParam('Request')) && $model->save(false)) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                $model->status = Request::STATUS_NEW;
+                $files = UploadedFile::getInstances($model, 'imageFiles');
                 $filesystem = FilesystemAdapter::adapter();
                 $files = UploadedFile::getInstances($model, 'imageFiles');
                 foreach ($files as $file) {
                     $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
                     $fileStream = fopen($file->tempName, 'r+');
                     $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
-                    $model->imageFiles = 'app/web/local/' . $path;
-                    $model->description =$this->request->post('description');
+                    $model->imageFiles[] = '@web/uploads/local/' . $path;
                 }
-                $model->status = Request::STATUS_NEW;
+                $model->images_path = json_encode($model->imageFiles);
+                $model->save();
                 if (Yii::$app->user->can('changeRequestStatus')) {
                     $model->status = $this->request->post()['Request']['status'];
+                    $model->save();
                 }
-                $model->save();
             }
+             //var_dump($model->imageFiles);
             return $this->redirect(['view', 'id' => $model->id]);
-
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);

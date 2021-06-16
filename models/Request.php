@@ -8,6 +8,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "request".
@@ -17,6 +18,7 @@ use yii\db\Expression;
  * @property int|null $created_by
  * @property string $status
  * @property string $imageFiles
+ * @property Json $images_path
  * @property string|null $created_at
  *
  * @property User $createdBy
@@ -24,10 +26,14 @@ use yii\db\Expression;
  */
 class Request extends \yii\db\ActiveRecord
 {
+    public $imageFiles;
     const STATUS_NEW = 'new';
     const STATUS_PENDING = 'pending';
     const STATUS_ACCEPTED= 'accepted';
     const STATUS_DECLINED = 'declined';
+    /**
+     * @var bool|mixed|null
+     */
 
 
     /**
@@ -64,7 +70,8 @@ class Request extends \yii\db\ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
-            [['imageFiles'],'string'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
+            [['images_path'], 'string'],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
@@ -82,6 +89,7 @@ class Request extends \yii\db\ActiveRecord
             'description' => 'Description',
             'created_by' => 'Created By',
             'status' => 'Status',
+            'images_path' => 'Images Path',
             'created_at' => 'Created At',
             'imageFiles' => 'Image Files'
         ];
