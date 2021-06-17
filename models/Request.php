@@ -1,12 +1,12 @@
 <?php
 
 
-
 namespace app\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\Json;
 
@@ -29,7 +29,7 @@ class Request extends \yii\db\ActiveRecord
     public $imageFiles;
     const STATUS_NEW = 'new';
     const STATUS_PENDING = 'pending';
-    const STATUS_ACCEPTED= 'accepted';
+    const STATUS_ACCEPTED = 'accepted';
     const STATUS_DECLINED = 'declined';
     /**
      * @var bool|mixed|null
@@ -85,7 +85,7 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => Yii::t('app', 'Name'),
             'description' => 'Description',
             'created_by' => 'Created By',
             'status' => 'Status',
@@ -98,7 +98,7 @@ class Request extends \yii\db\ActiveRecord
     /**
      * Gets query for [[CreatedBy]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCreatedBy()
     {
@@ -108,7 +108,7 @@ class Request extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Purchases]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getPurchases()
     {

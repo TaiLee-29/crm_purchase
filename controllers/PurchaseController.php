@@ -24,8 +24,7 @@ class PurchaseController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
+        return
             [
                 'access' => [
                     'class' => AccessControl::class,
@@ -58,13 +57,12 @@ class PurchaseController extends Controller
                     ],
                 ],
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
-        );
+            ];
     }
 
     /**
@@ -90,10 +88,10 @@ class PurchaseController extends Controller
      */
     public function actionView(int $id)
     {
-        $model=$this->findModel($id);
+        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $model,
-            //'images' => $images
+//            'images' => $model->request->images_path
         ]);
     }
 

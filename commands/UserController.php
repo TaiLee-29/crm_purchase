@@ -7,7 +7,7 @@ use Yii;
 use yii\base\BaseObject;
 use yii\console\Controller;
 
-class RbacController extends Controller
+class UserController extends Controller
 {
     /**
      * @throws \yii\base\Exception
@@ -27,7 +27,7 @@ class RbacController extends Controller
         $deleteRequest->description = 'Delete Request';
         $auth->add($deleteRequest);
 
-        // добавляем разрешение "updatePost"
+        // добавляем разрешение "updatePost "
         $updateRequest = $auth->createPermission('updateRequest');
         $updateRequest->description = 'Update Request';
         $auth->add($updateRequest);

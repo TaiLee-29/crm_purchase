@@ -29,8 +29,7 @@ class RequestController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
+        return
             [
                 'access' => [
                     'class' => AccessControl::class,
@@ -63,20 +62,19 @@ class RequestController extends Controller
                     ],
                 ],
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
                 ],
                 [
-                    'class' => TimestampBehavior::className(),
+                    'class' => TimestampBehavior::class,
                     'createdAtAttribute' => 'created_at',
                     'updatedAtAttribute' => false,
                     'value' => new Expression('NOW()'),
                 ],
 
-            ]
-        );
+            ];
     }
 
     /**
@@ -100,11 +98,10 @@ class RequestController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView(int $id, UrlManager $urlManager)
+    public function actionView(int $id)
     {
         $model=$this->findModel($id);
         $images = json_decode($model->images_path);
-        //var_dump(count($images));
         return $this->render('view', [
             'model' => $this->findModel($id),
             'images' => $images,
@@ -162,7 +159,6 @@ class RequestController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
         if ($this->request->isPost) {
             if (Yii::$app->user->can('admin')) {

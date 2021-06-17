@@ -23,7 +23,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -34,7 +34,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -130,22 +130,22 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionAddAdmin()
-    {
-        $model = User::find()->where(['username' => 'admin2'])->one();
-        if (empty($model)) {
-            $model = new User();
-            $model->username = 'admin2';
-            $model->email = 'admin2@gmail.com';
-            $model->setPassword('admin2123');
-            $model->generateAuthKey();
-            $model->save();
-            if ($model->save()) {
-                return $this->render('login', [
-                    'user' => $model,]);
-            }
-        }
-    }
+//    public function actionAddAdmin()
+//    {
+//        $model = User::find()->where(['username' => 'admin2'])->one();
+//        if (empty($model)) {
+//            $model = new User();
+//            $model->username = 'admin2';
+//            $model->email = 'admin2@gmail.com';
+//            $model->setPassword('admin2123');
+//            $model->generateAuthKey();
+//            $model->save();
+//            if ($model->save()) {
+//                return $this->render('login', [
+//                    'user' => $model,]);
+//            }
+//        }
+//    }
 
 
     public function actionSignup()
