@@ -104,7 +104,7 @@ class RequestController extends Controller
     {
         $model=$this->findModel($id);
         $images = json_decode($model->images_path);
-       // var_dump($images);
+        //var_dump(count($images));
         return $this->render('view', [
             'model' => $this->findModel($id),
             'images' => $images,
@@ -198,16 +198,13 @@ class RequestController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete(int $id)
+    {$model = $this->findModel($id);
         if (Yii::$app->user->can('deleteRequest')) {
-            $model = $this->findModel($id);
             if (Yii::$app->user->getId() == $model->created_by) {
                 $model->delete();
-                return $this->redirect(['index']);
             }
         }
-
         return $this->redirect(['index']);
     }
 

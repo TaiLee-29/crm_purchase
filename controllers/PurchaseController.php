@@ -88,10 +88,12 @@ class PurchaseController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
+        $model=$this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            //'images' => $images
         ]);
     }
 

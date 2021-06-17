@@ -19,9 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-<p> <?php foreach((array)$model->imageFiles as $key=>$img):?>
-
-    <?php endforeach;?></p>
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -30,8 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
-        ]) ?>
-        <?= Html::img($images, ['alt' => 'images'])?>
+        ])
+        ?>
+
     </p>
 
     <?php echo DetailView::widget([
@@ -44,7 +42,28 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
         ],
     ]);
+
   ?>
+    <?php  if (count($images) ==2){
+        echo Html::img($images[1]);
+    }
+    else if (count($images) ==3){
+        echo Html::img($images[1]);
+        echo Html::img($images[2]);
+    }else if (count($images) ==4){
+        echo Html::img($images[1]);
+        echo Html::img($images[2]);
+        echo Html::img($images[3]);
+    } else if (count($images) ==5){
+        echo Html::img($images[1]);
+        echo Html::img($images[2]);
+        echo Html::img($images[3]);
+        echo Html::img($images[4]);
+    } else{
+        echo 'no images for this request';
+    }?>
+
+
 
 
 
