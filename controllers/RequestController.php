@@ -67,12 +67,6 @@ class RequestController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-                [
-                    'class' => TimestampBehavior::class,
-                    'createdAtAttribute' => 'created_at',
-                    'updatedAtAttribute' => false,
-                    'value' => new Expression('NOW()'),
-                ],
 
             ];
     }
