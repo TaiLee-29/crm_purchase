@@ -12,12 +12,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Yii::t('app', 'description'))->textInput(['maxlength' => true]) ?>
 
     <?php if (Yii::$app->user->can('changeRequestStatus')) {
-        echo $form->field($model, 'status')->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => '']);
+        echo $form->field($model, Yii::t('app', 'status'))->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => '']);
     } ?>
-    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true,'accept' => '*']) ?>
+    <?= $form->field($model, Yii::t('app', 'ImageFiles[]'))->fileInput(['multiple' => true,'accept' => '*']) ?>
 
 
     <div class="form-group">

@@ -15,17 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, Yii::t('app', 'id')) ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?= $form->field($model, Yii::t('app', 'username')) ?>
 
-    <?= $form->field($model, 'auth_key') ?>
-
-    <?= $form->field($model, 'password') ?>
-
-    <?= $form->field($model, 'password_reset_token') ?>
-
-    <?php // echo $form->field($model, 'email') ?>
+    <?= $form->field($model, Yii::t('app', 'email')) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

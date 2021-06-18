@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\adapters\FilesystemAdapter;
+use app\adapters\FilesystemAdapter;
 use app\models\Request;
 use app\models\RequestSearch;
 use Yii;
@@ -118,7 +118,6 @@ class RequestController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 $model->status = Request::STATUS_NEW;
-                $files = UploadedFile::getInstances($model, 'imageFiles');
                 $filesystem = FilesystemAdapter::adapter();
                 $files = UploadedFile::getInstances($model, 'imageFiles');
                 foreach ($files as $file) {
