@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-
         <?= Html::a(Yii::t('app', 'Create User'), \yii\helpers\Url::to(['site/signup']), ['class' => 'btn btn-success']) ?>
+
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -35,5 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <? // Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
+
 </div>
+<?//= Html::a(Yii::t('app', 'Create User'), \yii\helpers\Url::to(['user/create']), ['class' => 'btn btn-success']) ?>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1415ea791ea0b05cff2b00ec2126fd1f",
+    "content-hash": "7a3d24850975f341ad190708b91358ad",
     "packages": [
         {
             "name": "2amigos/yii2-arrayquery-component",
@@ -92,16 +92,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.5.1",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
+                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/4c0e4becb8263bb5b3e6dadc448d8e7305ef8215",
-                "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/e786e3d9707ffd9b0dd330ca135b66344dcef85a",
+                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "type": "bower-asset",
             "license": [
@@ -427,6 +427,44 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/master"
             },
             "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
+            "name": "jakeasmith/http_build_url",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jakeasmith/http_build_url.git",
+                "reference": "93c273e77cb1edead0cf8bcf8cd2003428e74e37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jakeasmith/http_build_url/zipball/93c273e77cb1edead0cf8bcf8cd2003428e74e37",
+                "reference": "93c273e77cb1edead0cf8bcf8cd2003428e74e37",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/http_build_url.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jake A. Smith",
+                    "email": "theman@jakeasmith.com"
+                }
+            ],
+            "description": "Provides functionality for http_build_url() to environments without pecl_http.",
+            "support": {
+                "issues": "https://github.com/jakeasmith/http_build_url/issues",
+                "source": "https://github.com/jakeasmith/http_build_url"
+            },
+            "time": "2017-05-01T15:36:40+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1071,6 +1109,58 @@
             "time": "2021-05-27T09:17:38+00:00"
         },
         {
+            "name": "yii2-starter-kit/yii2-file-kit",
+            "version": "0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii-starter-kit/yii2-file-kit.git",
+                "reference": "37c10c8856d589869c3777bd34741d14d8aa2afc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii-starter-kit/yii2-file-kit/zipball/37c10c8856d589869c3777bd34741d14d8aa2afc",
+                "reference": "37c10c8856d589869c3777bd34741d14d8aa2afc",
+                "shasum": ""
+            },
+            "require": {
+                "jakeasmith/http_build_url": "*",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "suggest": {
+                "ext-http": "HTTP PHP Extension"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                },
+                "bootstrap": "trntv\\filekit\\storage\\FileStorage"
+            },
+            "autoload": {
+                "psr-4": {
+                    "trntv\\filekit\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Eugine Terentev",
+                    "email": "eugine@terentev.net"
+                }
+            ],
+            "description": "Yii2 file upload and storage kit",
+            "support": {
+                "issues": "https://github.com/yii-starter-kit/yii2-file-kit/issues",
+                "source": "https://github.com/yii-starter-kit/yii2-file-kit/tree/0.4"
+            },
+            "time": "2015-01-13T14:40:00+00:00"
+        },
+        {
             "name": "yii2mod/yii2-rbac",
             "version": "dev-master",
             "source": {
@@ -1136,17 +1226,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "5405c4985b210ce8984a61ea409b02cf2870815c"
+                "reference": "bc2035d04fb13d2941670d9a17c7bc0b6f019d45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5405c4985b210ce8984a61ea409b02cf2870815c",
-                "reference": "5405c4985b210ce8984a61ea409b02cf2870815c",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bc2035d04fb13d2941670d9a17c7bc0b6f019d45",
+                "reference": "bc2035d04fb13d2941670d9a17c7bc0b6f019d45",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
-                "bower-asset/jquery": "3.5.*@stable | 3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+                "bower-asset/jquery": "3.6.*@stable | 3.5.*@stable | 3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
@@ -1250,7 +1340,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-15T12:19:07+00:00"
+            "time": "2021-06-22T09:34:44+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap4",
@@ -3237,12 +3327,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0b7bdb98a2f9622e5d8739b118e005cf17b46502"
+                "reference": "2b0a4bb65811306a09d62d4c406b9d060baa8480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0b7bdb98a2f9622e5d8739b118e005cf17b46502",
-                "reference": "0b7bdb98a2f9622e5d8739b118e005cf17b46502",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2b0a4bb65811306a09d62d4c406b9d060baa8480",
+                "reference": "2b0a4bb65811306a09d62d4c406b9d060baa8480",
                 "shasum": ""
             },
             "require": {
@@ -3326,7 +3416,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-15T12:16:06+00:00"
+            "time": "2021-06-22T09:04:28+00:00"
         },
         {
             "name": "psr/container",
@@ -4420,18 +4510,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "5d5f97809015102116208b976eb2edb44b689560"
+                "reference": "fcd0b29a7a0b1bb5bfbedc6231583d77fea04814"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/5d5f97809015102116208b976eb2edb44b689560",
-                "reference": "5d5f97809015102116208b976eb2edb44b689560",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/fcd0b29a7a0b1bb5bfbedc6231583d77fea04814",
+                "reference": "fcd0b29a7a0b1bb5bfbedc6231583d77fea04814",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -4462,7 +4551,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v5.3.0-RC1"
+                "source": "https://github.com/symfony/css-selector/tree/v5.3.0"
             },
             "funding": [
                 {
@@ -4478,7 +4567,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-16T13:07:46+00:00"
+            "time": "2021-05-26T17:40:38+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4792,18 +4881,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "ccccb9d48ca42757dd12f2ca4bf857a4e217d90d"
+                "reference": "0ae3f047bed4edff6fd35b26a9a6bfdc92c953c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/ccccb9d48ca42757dd12f2ca4bf857a4e217d90d",
-                "reference": "ccccb9d48ca42757dd12f2ca4bf857a4e217d90d",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/0ae3f047bed4edff6fd35b26a9a6bfdc92c953c6",
+                "reference": "0ae3f047bed4edff6fd35b26a9a6bfdc92c953c6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -4830,7 +4918,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.3.0-RC1"
+                "source": "https://github.com/symfony/finder/tree/v5.3.0"
             },
             "funding": [
                 {
@@ -4846,7 +4934,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-16T13:07:46+00:00"
+            "time": "2021-05-26T12:52:38+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5548,12 +5636,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "8403a941039e7a9534e877f0bb38b8d9faa48f01"
+                "reference": "b419d648592b0b8911cbbe10d450fe314f4fd262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/8403a941039e7a9534e877f0bb38b8d9faa48f01",
-                "reference": "8403a941039e7a9534e877f0bb38b8d9faa48f01",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/b419d648592b0b8911cbbe10d450fe314f4fd262",
+                "reference": "b419d648592b0b8911cbbe10d450fe314f4fd262",
                 "shasum": ""
             },
             "require": {
@@ -5599,7 +5687,7 @@
                 "issues": "https://github.com/webmozarts/assert/issues",
                 "source": "https://github.com/webmozarts/assert/tree/master"
             },
-            "time": "2021-05-28T09:10:12+00:00"
+            "time": "2021-06-19T13:45:26+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -5861,7 +5949,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "league/flysystem": 20
+        "league/flysystem": 20,
+        "yii2-starter-kit/yii2-file-kit": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,

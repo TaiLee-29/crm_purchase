@@ -3,6 +3,7 @@
 
 namespace app\models;
 
+use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -57,7 +58,14 @@ class Request extends \yii\db\ActiveRecord
                 'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => false
+            ],
+            'file' =>[
+                'class' => UploadBehavior::class,
+                'attribute'=> 'file',
+                'pathAttribute' => '',
             ]
+
+
         ];
     }
 

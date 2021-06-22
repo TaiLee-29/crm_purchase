@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "league/flysystem": "2.x-dev",
       "ext-json": "*",
-        "yii2mod/yii2-rbac": "*"
+        "yii2mod/yii2-rbac": "*",
+        "yii2-starter-kit/yii2-file-kit": "@stable"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

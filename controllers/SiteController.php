@@ -36,6 +36,11 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['? '],
                     ],
+                    [
+                        'actions' => ['Signup'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ],
             ],
             'verbs' => [
