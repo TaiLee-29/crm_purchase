@@ -38,7 +38,6 @@ class SignupForm extends Model
 
     public function signup()
     {
-
         if ($this->validate()) {
             $user = new User();
             $user->username = $this->username;

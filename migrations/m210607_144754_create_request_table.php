@@ -18,7 +18,6 @@ class m210607_144754_create_request_table extends Migration
             'description' => $this->string()->notNull(),
             'created_by' => $this->integer(),
             'status' => 'ENUM("new", "pending", "accepted", "declined") NOT NULL DEFAULT "new"',
-            'images_path'=>$this->string(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ]);

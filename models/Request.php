@@ -8,6 +8,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\Json;
 
@@ -18,20 +19,18 @@ use yii\helpers\Json;
  * @property string $description
  * @property int|null $created_by
  * @property string $status
- * @property string $imageFiles
- * @property Json $images_path
  * @property string|null $created_at
  *
  * @property User $createdBy
  * @property Purchase[] $purchases
+ * @property RequestFile[] $files
  */
-class Request extends \yii\db\ActiveRecord
+class Request extends ActiveRecord
 {
     public $imageFiles;
     const STATUS_NEW = 'new';
-    const STATUS_PENDING = 'pending';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_DECLINED = 'declined';
+
+    const main_path ='@web/uploads/local/' ;
     /**
      * @var bool|mixed|null
      */
@@ -45,7 +44,7 @@ class Request extends \yii\db\ActiveRecord
         return '{{%request}}';
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             [
@@ -60,12 +59,10 @@ class Request extends \yii\db\ActiveRecord
                 'updatedByAttribute' => false
             ],
             'file' =>[
-                'class' => UploadBehavior::class,
-                'attribute'=> 'file',
-                'pathAttribute' => '',
+                'class' => \trntv\filekit\behaviors\UploadBehavior::class,
+                'uploadAttribute'=> 'file',
+                'resultAttribute' => 'main_path',
             ]
-
-
         ];
     }
 
@@ -78,8 +75,6 @@ class Request extends \yii\db\ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
-            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
-            [['images_path'], 'string'],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
@@ -89,7 +84,7 @@ class Request extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -97,7 +92,6 @@ class Request extends \yii\db\ActiveRecord
             'description' => 'Description',
             'created_by' => 'Created By',
             'status' => 'Status',
-            'images_path' => 'Images Path',
             'created_at' => 'Created At',
             'imageFiles' => 'Image Files'
         ];
@@ -108,7 +102,7 @@ class Request extends \yii\db\ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'created_by']);
     }
@@ -118,9 +112,13 @@ class Request extends \yii\db\ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getPurchases()
+    public function getPurchases(): ActiveQuery
     {
         return $this->hasMany(Purchase::class, ['request_id' => 'id']);
     }
 
+    public function getFiles(): ActiveQuery
+    {
+        return $this->hasMany(RequestFile::class, ['request_id' => 'id']);
+    }
 }

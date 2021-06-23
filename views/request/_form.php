@@ -17,7 +17,8 @@ use yii\widgets\ActiveForm;
     <?php if (Yii::$app->user->can('changeRequestStatus')) {
         echo $form->field($model, Yii::t('app', 'status'))->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => '']);
     } ?>
-    <?= $form->field($model, Yii::t('app', 'ImageFiles[]'))->label('Pictures')->widget('\trntv\filekit\widget\Upload',
+    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true,'accept' => '*']) ?>
+    <?= $form->field($model, Yii::t('app', 'ImageFiles[]'))->label('Pictures')->widget(\trntv\filekit\widget\Upload::class,
     [
             'sortable' => true,
             'maxFileSize'=> 20 * 1024 * 1024,

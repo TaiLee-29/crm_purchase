@@ -4,19 +4,17 @@ namespace app\controllers;
 
 use app\adapters\FilesystemAdapter;
 use app\models\Request;
+use app\models\RequestFile;
 use app\models\RequestSearch;
+use League\Flysystem\FilesystemException;
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
+use yii\base\Exception;
 use yii\filters\AccessControl;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
-use League\Flysystem\Local\LocalFilesystemAdapter;
-use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
-use yii\web\UrlManager;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -95,11 +93,10 @@ class RequestController extends Controller
     public function actionView(int $id)
     {
         $model=$this->findModel($id);
-        $images = json_decode($model->images_path);
+        $images = $model->files;
         return $this->render('view', [
             'model' => $this->findModel($id),
             'images' => $images,
-
 
         ]);
     }
@@ -107,8 +104,9 @@ class RequestController extends Controller
     /**
      * Creates a new Request model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     * @throws \League\Flysystem\FilesystemException
+     * @return string|Response
+     * @throws FilesystemException
+     * @throws Exception
      */
     public function actionCreate()
     {  /*if (!\Yii::$app->user->can('createRequest')) {
@@ -124,9 +122,11 @@ class RequestController extends Controller
                     $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
                     $fileStream = fopen($file->tempName, 'r+');
                     $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
-                    $model->imageFiles[] = '@web/uploads/local/' . $path;
+                    $file = new RequestFile();
+                    $file->request_id = $model->id;
+                    $file->path_to_file = '@web/uploads/local/' . $path;
+                    $file->save();
                 }
-                $model->images_path = json_encode($model->imageFiles);
                 $model->save();
                 if (Yii::$app->user->can('changeRequestStatus')) {
                     $model->status = $this->request->post()['Request']['status'];
@@ -150,7 +150,7 @@ class RequestController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         if ($this->request->isPost) {
@@ -184,10 +184,10 @@ class RequestController extends Controller
      * Deletes an existing Request model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @return mixed
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete(int $id)
+    public function actionDelete(int $id): Response
     {$model = $this->findModel($id);
         if (Yii::$app->user->can('deleteRequest')) {
             if (Yii::$app->user->getId() == $model->created_by) {

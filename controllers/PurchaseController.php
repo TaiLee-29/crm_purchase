@@ -89,7 +89,7 @@ class PurchaseController extends Controller
     public function actionView(int $id)
     {
         $model = $this->findModel($id);
-        $images = json_decode($model->request->images_path);
+        $images = $model->request->files;
         return $this->render('view', [
             'model' => $model,
             'images' => $images
