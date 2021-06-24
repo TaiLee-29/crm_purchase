@@ -21,7 +21,6 @@ use yii\web\UploadedFile;
  */
 class RequestController extends Controller
 {
-
     /**
      * @inheritDoc
      */
@@ -101,43 +100,36 @@ class RequestController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Request model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|Response
-     * @throws FilesystemException
-     * @throws Exception
-     */
+
     public function actionCreate()
     {  /*if (!\Yii::$app->user->can('createRequest')) {
         throw new ForbiddenHttpException('Access denied');
     }*/
         $model = new Request();
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                $model->status = Request::STATUS_NEW;
-                $filesystem = FilesystemAdapter::adapter();
-                $files = UploadedFile::getInstances($model, 'imageFiles');
-                foreach ($files as $file) {
-                    $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
-                    $fileStream = fopen($file->tempName, 'r+');
-                    $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
-                    $file = new RequestFile();
-                    $file->request_id = $model->id;
-                    $file->path_to_file = '@web/uploads/local/' . $path;
-                    $file->save();
-                }
-                $model->save();
-                if (Yii::$app->user->can('changeRequestStatus')) {
-                    $model->status = $this->request->post()['Request']['status'];
-                    $model->save();
-                }
-            }
-             //var_dump($model->imageFiles);
+
+        if ($model->load($this->request->post()) && $model->save()) {
+//                $model->status = Request::STATUS_NEW;
+//                $filesystem = FilesystemAdapter::adapter();
+//                $files = UploadedFile::getInstances($model, 'imageFiles');
+//                foreach ($files as $file) {
+//                    $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
+//                    $fileStream = fopen($file->tempName, 'r+');
+//                    $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
+//                    $file = new RequestFile();
+//                    $file->request_id = $model->id;
+//                    $file->path_to_file = '@web/uploads/local/' . $path;
+//                    $file->save();
+//                }
+//                $model->save();
+//                if (Yii::$app->user->can('changeRequestStatus')) {
+//                    $model->status = $this->request->post()['Request']['status'];
+//                    $model->save();
+//                }
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            $model->loadDefaultValues();
+//
         }
+             //var_dump($model->imageFiles);
+
         return $this->render('create', [
             'model' => $model,
         ]);

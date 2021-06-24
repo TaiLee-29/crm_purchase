@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a3d24850975f341ad190708b91358ad",
+    "content-hash": "c7b347299d9b00fd075792448e288c5b",
     "packages": [
         {
             "name": "2amigos/yii2-arrayquery-component",
@@ -95,7 +95,7 @@
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -429,83 +429,126 @@
             "time": "2020-06-29T00:56:53+00:00"
         },
         {
-            "name": "jakeasmith/http_build_url",
+            "name": "fortawesome/font-awesome",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jakeasmith/http_build_url.git",
-                "reference": "93c273e77cb1edead0cf8bcf8cd2003428e74e37"
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "d79d85c3fad85ad1885e87ed558f4afd6fce8289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jakeasmith/http_build_url/zipball/93c273e77cb1edead0cf8bcf8cd2003428e74e37",
-                "reference": "93c273e77cb1edead0cf8bcf8cd2003428e74e37",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/d79d85c3fad85ad1885e87ed558f4afd6fce8289",
+                "reference": "d79d85c3fad85ad1885e87ed558f4afd6fce8289",
                 "shasum": ""
             },
             "default-branch": true,
             "type": "library",
-            "autoload": {
-                "files": [
-                    "src/http_build_url.php"
-                ]
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+                "CC-BY-4.0",
+                "OFL-1.1",
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Jake A. Smith",
-                    "email": "theman@jakeasmith.com"
+                    "name": "Travis Chase",
+                    "homepage": "http://twitter.com/supercodepoet"
+                },
+                {
+                    "name": "Dave Gandy",
+                    "homepage": "http://twitter.com/davegandy"
+                },
+                {
+                    "name": "Rob Madole",
+                    "homepage": "http://twitter.com/robmadole"
+                },
+                {
+                    "name": "Jory Raphael",
+                    "homepage": "http://twitter.com/sensibleworld"
+                },
+                {
+                    "name": "Geremia Taglialatela",
+                    "homepage": "http://twitter.com/gtagliala"
+                },
+                {
+                    "name": "Brian Talbot",
+                    "homepage": "http://twitter.com/talbs"
+                },
+                {
+                    "name": "Mike Wilkerson",
+                    "homepage": "http://twitter.com/mw77"
                 }
             ],
-            "description": "Provides functionality for http_build_url() to environments without pecl_http.",
+            "description": "The iconic font, CSS, and SVG framework",
+            "homepage": "https://fontawesome.com",
+            "keywords": [
+                "FontAwesome",
+                "awesome",
+                "bootstrap",
+                "font",
+                "icon",
+                "svg"
+            ],
             "support": {
-                "issues": "https://github.com/jakeasmith/http_build_url/issues",
-                "source": "https://github.com/jakeasmith/http_build_url"
+                "docs": "http://fontawesome.com/how-to-use",
+                "email": "hello@fontawesome.com",
+                "issues": "https://github.com/FortAwesome/Font-Awesome/issues",
+                "source": "https://github.com/FortAwesome/Font-Awesome"
             },
-            "time": "2017-05-01T15:36:40+00:00"
+            "time": "2021-03-16T18:57:33+00:00"
         },
         {
             "name": "league/flysystem",
-            "version": "2.x-dev",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "27ba26d8783e2ca3e4a5cf85534ccf1af6c68ec3"
+                "reference": "9be3b16c877d477357c015cec057548cf9b2a14a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/27ba26d8783e2ca3e4a5cf85534ccf1af6c68ec3",
-                "reference": "27ba26d8783e2ca3e4a5cf85534ccf1af6c68ec3",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9be3b16c877d477357c015cec057548cf9b2a14a",
+                "reference": "9be3b16c877d477357c015cec057548cf9b2a14a",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "league/mime-type-detection": "^1.0.0",
-                "php": "^7.2 || ^8.0"
+                "ext-fileinfo": "*",
+                "league/mime-type-detection": "^1.3",
+                "php": "^7.2.5 || ^8.0"
             },
             "conflict": {
-                "guzzlehttp/ringphp": "<1.1.1"
+                "league/flysystem-sftp": "<1.0.6"
             },
             "require-dev": {
-                "async-aws/s3": "^1.5",
-                "async-aws/simple-s3": "^1.0",
-                "aws/aws-sdk-php": "^3.132.4",
-                "composer/semver": "^3.0",
-                "ext-fileinfo": "*",
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "google/cloud-storage": "^1.23",
-                "phpseclib/phpseclib": "^2.0",
-                "phpstan/phpstan": "^0.12.26",
-                "phpunit/phpunit": "^8.5 || ^9.4",
-                "sabre/dav": "^4.1"
+                "phpspec/prophecy": "^1.11.1",
+                "phpunit/phpunit": "^8.5.8"
             },
-            "default-branch": true,
+            "suggest": {
+                "ext-fileinfo": "Required for MimeType",
+                "ext-ftp": "Allows you to use FTP server storage",
+                "ext-openssl": "Allows you to use FTPS server storage",
+                "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
+                "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
+                "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
+                "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
+                "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
+                "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
+                "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
+                "league/flysystem-webdav": "Allows you to use WebDAV storage",
+                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
+                "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
+                "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "League\\Flysystem\\": "src"
+                    "League\\Flysystem\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -515,42 +558,40 @@
             "authors": [
                 {
                     "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl"
+                    "email": "info@frenky.net"
                 }
             ],
-            "description": "File storage abstraction for PHP",
+            "description": "Filesystem abstraction: Many filesystems, one API.",
             "keywords": [
+                "Cloud Files",
                 "WebDAV",
+                "abstraction",
                 "aws",
                 "cloud",
-                "file",
+                "copy.com",
+                "dropbox",
+                "file systems",
                 "files",
                 "filesystem",
                 "filesystems",
                 "ftp",
+                "rackspace",
+                "remote",
                 "s3",
                 "sftp",
                 "storage"
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/2.x"
+                "source": "https://github.com/thephpleague/flysystem/tree/1.x"
             },
             "funding": [
                 {
                     "url": "https://offset.earth/frankdejonge",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/frankdejonge",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/league/flysystem",
-                    "type": "tidelift"
+                    "type": "other"
                 }
             ],
-            "time": "2021-06-15T20:42:42+00:00"
+            "time": "2020-08-23T07:39:11+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -609,6 +650,59 @@
             "time": "2021-01-18T20:58:21+00:00"
         },
         {
+            "name": "npm-asset/blueimp-canvas-to-blob",
+            "version": "3.5.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/blueimp-canvas-to-blob/-/blueimp-canvas-to-blob-3.5.0.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/blueimp-file-upload",
+            "version": "9.34.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/blueimp-file-upload/-/blueimp-file-upload-9.34.0.tgz"
+            },
+            "require": {
+                "npm-asset/blueimp-canvas-to-blob": "3.5.0",
+                "npm-asset/blueimp-load-image": "2.12.2",
+                "npm-asset/blueimp-tmpl": "3.6.0"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/blueimp-load-image",
+            "version": "2.12.2",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/blueimp-load-image/-/blueimp-load-image-2.12.2.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/blueimp-tmpl",
+            "version": "3.6.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/blueimp-tmpl/-/blueimp-tmpl-3.6.0.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "npm-asset/bootstrap",
             "version": "4.6.0",
             "dist": {
@@ -619,6 +713,66 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "a1b448cef7e03a0b5a6286276bef004efa83f323"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/a1b448cef7e03a0b5a6286276bef004efa83f323",
+                "reference": "a1b448cef7e03a0b5a6286276bef004efa83f323",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "^2.0.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "1.0.*",
+                "phpdocumentor/reflection-docblock": "~3.1.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "support": {
+                "issues": "https://github.com/rmrevin/yii2-fontawesome/issues",
+                "source": "https://github.com/rmrevin/yii2-fontawesome"
+            },
+            "time": "2018-04-01T12:51:52+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1110,37 +1264,32 @@
         },
         {
             "name": "yii2-starter-kit/yii2-file-kit",
-            "version": "0.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yii-starter-kit/yii2-file-kit.git",
-                "reference": "37c10c8856d589869c3777bd34741d14d8aa2afc"
+                "reference": "e7fbf1a4dab8d9638b5dec90af64476392c450d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yii-starter-kit/yii2-file-kit/zipball/37c10c8856d589869c3777bd34741d14d8aa2afc",
-                "reference": "37c10c8856d589869c3777bd34741d14d8aa2afc",
+                "url": "https://api.github.com/repos/yii-starter-kit/yii2-file-kit/zipball/e7fbf1a4dab8d9638b5dec90af64476392c450d0",
+                "reference": "e7fbf1a4dab8d9638b5dec90af64476392c450d0",
                 "shasum": ""
             },
             "require": {
-                "jakeasmith/http_build_url": "*",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "*"
+                "league/flysystem": "^1.0",
+                "npm-asset/blueimp-file-upload": "^9.7.0",
+                "rmrevin/yii2-fontawesome": "^3.4",
+                "yiisoft/yii2-jui": "^2.0.0"
             },
-            "suggest": {
-                "ext-http": "HTTP PHP Extension"
+            "require-dev": {
+                "creocoder/yii2-flysystem": "~0.8",
+                "phpunit/phpunit": "~4.5.0"
             },
             "type": "yii2-extension",
-            "extra": {
-                "asset-installer-paths": {
-                    "npm-asset-library": "vendor/npm",
-                    "bower-asset-library": "vendor/bower"
-                },
-                "bootstrap": "trntv\\filekit\\storage\\FileStorage"
-            },
             "autoload": {
                 "psr-4": {
-                    "trntv\\filekit\\": ""
+                    "trntv\\filekit\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1149,16 +1298,20 @@
             ],
             "authors": [
                 {
-                    "name": "Eugine Terentev",
-                    "email": "eugine@terentev.net"
+                    "name": "Eugene Terentev",
+                    "email": "eugene@terentev.net"
+                },
+                {
+                    "name": "Victor Gonzalez",
+                    "email": "victor@vgr.cl"
                 }
             ],
             "description": "Yii2 file upload and storage kit",
             "support": {
                 "issues": "https://github.com/yii-starter-kit/yii2-file-kit/issues",
-                "source": "https://github.com/yii-starter-kit/yii2-file-kit/tree/0.4"
+                "source": "https://github.com/yii-starter-kit/yii2-file-kit/tree/2.1.5"
             },
-            "time": "2015-01-13T14:40:00+00:00"
+            "time": "2020-07-20T14:38:27+00:00"
         },
         {
             "name": "yii2mod/yii2-rbac",
@@ -3327,12 +3480,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2b0a4bb65811306a09d62d4c406b9d060baa8480"
+                "reference": "79067856d85421c56d413bd238d4e2cd6b0e54da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2b0a4bb65811306a09d62d4c406b9d060baa8480",
-                "reference": "2b0a4bb65811306a09d62d4c406b9d060baa8480",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/79067856d85421c56d413bd238d4e2cd6b0e54da",
+                "reference": "79067856d85421c56d413bd238d4e2cd6b0e54da",
                 "shasum": ""
             },
             "require": {
@@ -3416,7 +3569,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-22T09:04:28+00:00"
+            "time": "2021-06-23T05:12:43+00:00"
         },
         {
             "name": "psr/container",
@@ -5510,12 +5663,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e24ecd6dd71b9c71b48f1e02cf3c789acbdf3d0e"
+                "reference": "2e59187ee6e56b97013bf76fdbf2be203e6cbeea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e24ecd6dd71b9c71b48f1e02cf3c789acbdf3d0e",
-                "reference": "e24ecd6dd71b9c71b48f1e02cf3c789acbdf3d0e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/2e59187ee6e56b97013bf76fdbf2be203e6cbeea",
+                "reference": "2e59187ee6e56b97013bf76fdbf2be203e6cbeea",
                 "shasum": ""
             },
             "require": {
@@ -5578,7 +5731,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:52:30+00:00"
+            "time": "2021-06-24T08:13:23+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -5949,8 +6102,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "league/flysystem": 20,
-        "yii2-starter-kit/yii2-file-kit": 0
+        "fortawesome/font-awesome": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -54,6 +54,12 @@ $config = [
             'rules' => [
             ],
         ],
+        'fileStorage'=>[
+            'class' => 'trntv\filekit\Storage',
+            'useDirindex' => true,
+            'baseUrl' => '@web/uploads/local',
+             'filesystem'=> \app\adapters\FilesystemAdapter::class
+        ],
 
     ],
     'params' => $params,

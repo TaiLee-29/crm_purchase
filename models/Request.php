@@ -20,14 +20,17 @@ use yii\helpers\Json;
  * @property int|null $created_by
  * @property string $status
  * @property string|null $created_at
- *
+ * @property array   $files
  * @property User $createdBy
  * @property Purchase[] $purchases
- * @property RequestFile[] $files
+ * @property RequestFile[] $requestFiles
  */
 class Request extends ActiveRecord
 {
-    public $imageFiles;
+
+    public $files ;
+
+
     const STATUS_NEW = 'new';
 
     const main_path ='@web/uploads/local/' ;
@@ -58,11 +61,14 @@ class Request extends ActiveRecord
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => false
             ],
-            'file' =>[
-                'class' => \trntv\filekit\behaviors\UploadBehavior::class,
-                'uploadAttribute'=> 'file',
-                'resultAttribute' => 'main_path',
-            ]
+            'file' => [
+                'class'          => UploadBehavior::class,
+                'attribute' => 'files',
+                'multiple'       => true,
+                'uploadRelation' => 'requestFiles',
+                'pathAttribute'  => 'path_to_file',
+            ],
+
         ];
     }
 
@@ -75,9 +81,10 @@ class Request extends ActiveRecord
             [['description'], 'required'],
             [['created_by'], 'integer'],
             [['status'], 'string'],
-            [['created_at'], 'safe'],
+            [['created_at','files'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['files'], 'save']
         ];
     }
 
@@ -93,7 +100,7 @@ class Request extends ActiveRecord
             'created_by' => 'Created By',
             'status' => 'Status',
             'created_at' => 'Created At',
-            'imageFiles' => 'Image Files'
+            'requestFiles' => 'Image Files'
         ];
     }
 
@@ -117,7 +124,7 @@ class Request extends ActiveRecord
         return $this->hasMany(Purchase::class, ['request_id' => 'id']);
     }
 
-    public function getFiles(): ActiveQuery
+    public function getRequestFiles(): ActiveQuery
     {
         return $this->hasMany(RequestFile::class, ['request_id' => 'id']);
     }
