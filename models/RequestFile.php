@@ -20,7 +20,7 @@ class RequestFile extends \yii\db\ActiveRecord
      */
     public static function tableName(): string
     {
-        return 'request_file';
+        return '{{%request_file}}';
     }
 
     /**
