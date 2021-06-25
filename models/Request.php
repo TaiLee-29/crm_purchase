@@ -3,7 +3,7 @@
 
 namespace app\models;
 
-use trntv\filekit\behaviors\UploadBehavior;
+use app\widgets\upload\UploadBehavior;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -59,7 +59,7 @@ class Request extends ActiveRecord
                 'updatedByAttribute' => false
             ],
             [
-                'class' => \trntv\filekit\behaviors\UploadBehavior::class,
+                'class' => UploadBehavior::class,
                 'attribute'      => 'files',
                 'multiple'       => true,
                 'uploadRelation'=> 'requestFiles',
@@ -77,7 +77,7 @@ class Request extends ActiveRecord
             [['description','status'], 'required'],
             [['created_by'], 'integer'],
             [['status'],'string'],
-            ['status', 'default', 'value' => Request::STATUS_NEW],
+//            ['status', 'default', 'value' => Request::STATUS_NEW],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],

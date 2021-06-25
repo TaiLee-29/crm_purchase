@@ -16,14 +16,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <?php if (Yii::$app->user->can('changeRequestStatus')) {
-        echo $form->field($model, 'status')->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => 'new']);
+        echo $form->field($model, 'status')->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], []);
+    } else {
+        echo $form->field($model, 'status')->dropDownList(['new' => 'New'], []);
     } ?>
     <?= $form->field($model, 'files')->label('Pictures')->widget(Upload::class,
         [
             'url' => ['file/upload'],
             'sortable' => true,
             'maxFileSize' => 10 * 1024 * 1024, // 10Mb
-
             'maxNumberOfFiles' => 4,
         ]
     ); ?>

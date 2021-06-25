@@ -42,9 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
         ],
     ]);
-    //echo Html::img($images['path_to_file']);
+
 
   ?>
+
 
 
 

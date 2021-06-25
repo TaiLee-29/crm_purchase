@@ -31,7 +31,7 @@ class RequestFile extends \yii\db\ActiveRecord
         return [
             [['request_id'], 'integer'],
             [['path_to_file'], 'string', 'max' => 255],
-//            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::class, 'targetAttribute' => ['request_id' => 'id']],
+           [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::class, 'targetAttribute' => ['request_id' => 'id']],
         ];
     }
 
