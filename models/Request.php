@@ -23,11 +23,11 @@ use yii\helpers\Json;
  *
  * @property User $createdBy
  * @property Purchase[] $purchases
- * @property RequestFile[] $files
+ * @property RequestFile[] $requestFiles
  */
 class Request extends ActiveRecord
 {
-    public $imageFiles;
+    public $files;
     const STATUS_NEW = 'new';
 
     const main_path ='@web/uploads/local/' ;
@@ -58,10 +58,12 @@ class Request extends ActiveRecord
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => false
             ],
-            'file' =>[
+            [
                 'class' => \trntv\filekit\behaviors\UploadBehavior::class,
-                'uploadAttribute'=> 'file',
-                'resultAttribute' => 'main_path',
+                'attribute'      => 'files',
+                'multiple'       => true,
+                'uploadRelation'=> 'requestFiles',
+                'pathAttribute' => 'path_to_file',
             ]
         ];
     }
@@ -72,12 +74,14 @@ class Request extends ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'required'],
+            [['description','status'], 'required'],
             [['created_by'], 'integer'],
-            [['status'], 'string'],
+            [['status'],'string'],
+            ['status', 'default', 'value' => Request::STATUS_NEW],
             [['created_at'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['files'], 'safe'],
         ];
     }
 
@@ -87,13 +91,13 @@ class Request extends ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
+            'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'description' => 'Description',
-            'created_by' => 'Created By',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'imageFiles' => 'Image Files'
+            'description' =>  Yii::t('app', 'Description'),
+            'created_by' =>  Yii::t('app', 'Created By'),
+            'status' => Yii::t('app',  'Status'),
+            'created_at' =>  Yii::t('app', 'Created At'),
+            'imageFiles' =>  Yii::t('app', 'Image Files')
         ];
     }
 
@@ -117,8 +121,9 @@ class Request extends ActiveRecord
         return $this->hasMany(Purchase::class, ['request_id' => 'id']);
     }
 
-    public function getFiles(): ActiveQuery
+    public function getRequestFiles(): ActiveQuery
     {
         return $this->hasMany(RequestFile::class, ['request_id' => 'id']);
     }
+
 }

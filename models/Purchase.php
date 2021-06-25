@@ -48,11 +48,11 @@ class Purchase extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'description' => 'Description',
-            'name' => 'Name',
-            'price' => 'Price',
-            'request_id' => 'Request ID'
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'description' =>  Yii::t('app', 'Description'),
+            'price' => Yii::t('app', 'Price'),
+            'request_id' => Yii::t('app', 'Request ID')
         ];
     }
 

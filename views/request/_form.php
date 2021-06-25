@@ -1,5 +1,6 @@
 <?php
 
+use app\widgets\upload\Upload;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,18 +16,18 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, Yii::t('app', 'description'))->textInput(['maxlength' => true]) ?>
 
     <?php if (Yii::$app->user->can('changeRequestStatus')) {
-        echo $form->field($model, Yii::t('app', 'status'))->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => '']);
+        echo $form->field($model, Yii::t('app', 'status'))->dropDownList(['new' => 'New', 'pending' => 'Pending', 'accepted' => 'Accepted', 'declined' => 'Declined',], ['prompt' => 'new']);
     } ?>
-    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true,'accept' => '*']) ?>
-    <?= $form->field($model, Yii::t('app', 'ImageFiles[]'))->label('Pictures')->widget(\trntv\filekit\widget\Upload::class,
-    [
+    <?= $form->field($model, 'files')->label('Pictures')->widget(Upload::class,
+        [
+            'url' => ['file/upload'],
             'sortable' => true,
-            'maxFileSize'=> 20 * 1024 * 1024,
+            'maxFileSize' => 10 * 1024 * 1024, // 10Mb
+
             'maxNumberOfFiles' => 4,
-    ]
+        ]
     ); ?>
 
-    <
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

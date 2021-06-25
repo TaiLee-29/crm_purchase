@@ -12,6 +12,15 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'fileStorage'=>[
+            'class' => 'trntv\filekit\Storage',
+            'baseUrl' => '@web/uploads',
+            'filesystem'=> function() {
+                $adapter = new \League\Flysystem\Adapter\Local('uploads');
+                return new League\Flysystem\Filesystem($adapter);
+            }
+
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '12321',
@@ -65,7 +74,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
