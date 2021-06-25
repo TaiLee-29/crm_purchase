@@ -13,13 +13,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, Yii::t('app', 'name'))->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model,  'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, Yii::t('app', 'description'))->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, Yii::t('app', 'price'))->textInput() ?>
+    <?= $form->field($model,  'price')->textInput() ?>
 
-    <?= $form->field($model, Yii::t('app', 'request_id'))->dropDownList($requestList); ?>
+    <?= $form->field($model,  'request_id')->dropDownList($requestList); ?>
 
 
     <div class="form-group">

@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, Yii::t('app', 'name'))->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, Yii::t('app', 'description'))->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, Yii::t('app', 'price'))->textInput() ?>
+    <?= $form->field($model,  'price')->textInput() ?>
 
 
     <div class="form-group">

@@ -37,23 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'request_id',
         ],
     ]) ?>
-    <?php  if (count($images) ==2){
-        echo Html::img($images[1]);
-    }
-    else if (count($images) ==3){
-        echo Html::img($images[1]);
-        echo Html::img($images[2]);
-    }else if (count($images) ==4){
-        echo Html::img($images[1]);
-        echo Html::img($images[2]);
-        echo Html::img($images[3]);
-    } else if (count($images) ==5){
-        echo Html::img($images[1]);
-        echo Html::img($images[2]);
-        echo Html::img($images[3]);
-        echo Html::img($images[4]);
-    } else{
-        echo 'no images for this request';
-    }?>
+
 
 </div>

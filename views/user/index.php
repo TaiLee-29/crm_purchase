@@ -37,4 +37,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
-<?//= Html::a(Yii::t('app', 'Create User'), \yii\helpers\Url::to(['user/create']), ['class' => 'btn btn-success']) ?>

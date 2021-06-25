@@ -25,11 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?= $form->field($model, Yii::t('app', 'username'))->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, Yii::t('app', 'password'))->passwordInput() ?>
+    <?= $form->field($model,  'password')->passwordInput() ?>
 
-    <?= $form->field($model, Yii::t('app', 'rememberMe'))->checkbox([
+    <?= $form->field($model, 'rememberMe')->checkbox([
         'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
     ]) ?>
 

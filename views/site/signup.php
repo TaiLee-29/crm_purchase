@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
 
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-            <?= $form->field($model, Yii::t('app', 'username'))->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, Yii::t('app', 'email'))->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, Yii::t('app', 'password'))->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
             <div class="form-group">
-                <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton(Yii::t('app','Create'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
 
