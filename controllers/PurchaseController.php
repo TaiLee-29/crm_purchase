@@ -42,17 +42,17 @@ class PurchaseController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['admin'],
+                            'roles' => ['createPurchase'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['admin'],
+                            'roles' => ['updatePurchase'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['admin'],
+                            'roles' => ['deletePurchase'],
                         ],
                     ],
                 ],

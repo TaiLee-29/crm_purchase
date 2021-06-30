@@ -43,7 +43,6 @@ class RequestForm extends Model
             $request->status = \app\models\Request::STATUS_NEW;
             if (Yii::$app->user->can('changeRequestStatus')) {
                 $request->status = $this->request->post()['Request']['status'];
-                $request->save();
             }
             $request->save();
             return true;
