@@ -45,7 +45,7 @@ class RequestController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['@'],
+                            'roles' => ['createRequest'],
                         ],
                         [
                             'allow' => true,
@@ -55,7 +55,7 @@ class RequestController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['@'],
+                            'roles' => ['deleteRequest'],
                         ],
                     ],
                 ],
@@ -65,7 +65,6 @@ class RequestController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-
             ];
     }
 
@@ -131,6 +130,7 @@ class RequestController extends Controller
     public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
+        if (\Yii::$app->user->can('updateRequest', ['model' => $model])) {
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -138,8 +138,8 @@ class RequestController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-
-
+        }
+        return  $this->redirect(['index']);
     }
 
     /**

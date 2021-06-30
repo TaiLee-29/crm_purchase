@@ -69,12 +69,6 @@ class UserController extends Controller
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
-        $model = new User();
-        $model->username = 'admin';
-        $model->email = 'admin@gmail.com';
-        $model->setPassword('admin123');
-        $model->generateAuthKey();
-        $model->save();
-        $auth->assign($admin, $model->getId());
+
     }
 }

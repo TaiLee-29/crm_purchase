@@ -21,7 +21,8 @@
       "ext-json": "*",
         "yii2mod/yii2-rbac": "*",
         "yii2-starter-kit/yii2-file-kit": "dev-master",
-        "league/flysystem": "1.1.3"
+        "league/flysystem": "1.1.3",
+        "ext-http": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

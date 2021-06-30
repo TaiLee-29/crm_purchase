@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Requests'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-
+$countImg = count($images);
 ?>
 <div class="request-view">
 
@@ -46,7 +46,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
   ?>
 
-
+    <?php  if ($countImg == 1){
+        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
+    }
+    else if ($countImg == 2){
+        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
+    }else if ($countImg == 3){
+        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[2]['path_to_file'], ['alt' => 'ewewe']);
+    } else if ($countImg == 4){
+        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[2]['path_to_file'], ['alt' => 'ewewe']);
+        echo Html::img('@web/uploads/'.$images[3]['path_to_file'], ['alt' => 'ewewe']);
+    } else{
+        echo 'no images for this request';
+    }?>
 
 
 

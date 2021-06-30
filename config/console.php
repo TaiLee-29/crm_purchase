@@ -47,7 +47,13 @@ $config = [
                 '@app/migrations',
                 '@yii/rbac/migrations'
             ]
-        ]
+        ],
+        'rbac-migrate' => [
+            'class'          => \app\commands\RbacMigrateController::class,
+            'migrationPath'  => '@app/migrations/rbac/',
+            'migrationTable' => '{{%system_rbac_migration}}',
+            'templateFile'   => '@app/rbac/views/migration.php',
+        ],
     ],
 
 ];

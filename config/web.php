@@ -15,10 +15,14 @@ $config = [
         'fileStorage'=>[
             'class' => 'trntv\filekit\Storage',
             'baseUrl' => '@web/uploads',
-            'filesystem'=> function() {
-                $adapter = new \League\Flysystem\Adapter\Local('uploads');
-                return new League\Flysystem\Filesystem($adapter);
-            }
+            'filesystem'=> [
+                'class' => '\app\adapters\FileSystemBuilder',
+                'path' => 'uploads'
+    ]
+//                function() {
+//                $adapter = new \League\Flysystem\Adapter\Local('uploads');
+//                return new League\Flysystem\Filesystem($adapter);
+//            }
 
         ],
         'request' => [
