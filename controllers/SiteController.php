@@ -24,7 +24,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout'],
+                'only' => ['login', 'logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -34,10 +34,10 @@ class SiteController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
-                        'roles' => ['? '],
+                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['Signup'],
+                        'actions' => ['signup'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -139,23 +139,6 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
-//    public function actionAddAdmin()
-//    {
-//        $model = User::find()->where(['username' => 'admin2'])->one();
-//        if (empty($model)) {
-//            $model = new User();
-//            $model->username = 'admin2';
-//            $model->email = 'admin2@gmail.com';
-//            $model->setPassword('admin2123');
-//            $model->generateAuthKey();
-//            $model->save();
-//            if ($model->save()) {
-//                return $this->render('login', [
-//                    'user' => $model,]);
-//            }
-//        }
-//    }
 
 
     public function actionSignup()

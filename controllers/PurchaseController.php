@@ -105,12 +105,8 @@ class PurchaseController extends Controller
     {
         $model = new Purchase();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $requestList = ArrayHelper::map(Request::find()->all(), 'id', 'id');

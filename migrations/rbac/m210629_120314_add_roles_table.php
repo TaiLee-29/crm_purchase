@@ -38,7 +38,7 @@ class m210629_120314_add_roles_table extends Migration
 
     }
 
-    public function Down()
+    public function down()
     {
         $this->auth->remove($this->auth->getRole('user'));
         $this->auth->remove($this->auth->getRole('admin'));

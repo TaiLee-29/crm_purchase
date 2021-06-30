@@ -74,6 +74,8 @@ class m210629_120501_add_permissions_table extends Migration
         $this->auth->remove($this->auth->getPermission('createPurchase'));
         $this->auth->remove($this->auth->getPermission('deletePurchase'));
         $this->auth->remove($this->auth->getPermission('updatePurchase'));
+
+        $this->auth->remove($this->auth->getRule('OwnRule'));
     }
 
 

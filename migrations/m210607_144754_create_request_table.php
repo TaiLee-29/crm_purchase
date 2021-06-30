@@ -11,7 +11,7 @@ class m210607_144754_create_request_table extends Migration
      * {@inheritdoc}
      * @throws \yii\base\Exception
      */
-    public function Up()
+    public function up()
     {
         $this->createTable('{{%request}}', [
             'id' => $this->primaryKey(),
@@ -36,7 +36,7 @@ class m210607_144754_create_request_table extends Migration
     /**
      * {@inheritdoc}
      */
-    public function Down()
+    public function down()
     {
         $this->dropForeignKey(
             'fk-request-created_by',
