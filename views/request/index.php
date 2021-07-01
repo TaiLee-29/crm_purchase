@@ -31,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'created_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header'=>Yii::t('app','Действия'),
+                'headerOptions' => ['width' => '80'],
+                'template' =>'{view} {update} {delete}{link}',
+            ],
         ],
     ]); ?>
 

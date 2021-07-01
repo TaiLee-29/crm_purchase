@@ -9,20 +9,16 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        'fileStorage'=>[
+        'fileStorage' => [
             'class' => 'trntv\filekit\Storage',
             'baseUrl' => '@web/uploads',
-            'filesystem'=> [
+            'filesystem' => [
                 'class' => '\app\adapters\FileSystemBuilder',
                 'path' => 'uploads'
-    ]
-//                function() {
-//                $adapter = new \League\Flysystem\Adapter\Local('uploads');
-//                return new League\Flysystem\Filesystem($adapter);
-//            }
+            ]
 
         ],
         'request' => [

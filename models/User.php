@@ -24,7 +24,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     const STATUS_ACTIVE = 2;
     const STATUS_DELETED = 3;
-
+    const ADMIN_ID = 100;
     /**
      * @var string
      */

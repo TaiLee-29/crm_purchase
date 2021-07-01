@@ -24,13 +24,13 @@ use yii\helpers\Json;
  * @property User $createdBy
  * @property Purchase[] $purchases
  * @property RequestFile[] $requestFiles
+ * @property string $updated_at [datetime]
  */
 class Request extends ActiveRecord
 {
     public $files;
-    const STATUS_NEW = 'new';
+    public const STATUS_NEW = 'new';
 
-    const main_path ='@web/uploads/local/' ;
     /**
      * @var bool|mixed|null
      */

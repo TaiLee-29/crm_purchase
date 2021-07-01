@@ -10,7 +10,7 @@ class m210623_063717_request_files extends Migration
     /**
      * {@inheritdoc}
      */
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%request_file}}', [
             'id' => $this->primaryKey(),
@@ -30,7 +30,7 @@ class m210623_063717_request_files extends Migration
     /**
      * {@inheritdoc}
      */
-    public function safeDown()
+    public function down()
     {
         $this->dropForeignKey(
             'fk-file-request_id',

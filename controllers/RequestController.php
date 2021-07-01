@@ -50,7 +50,7 @@ class RequestController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['@'],
+                            'roles' => ['UpdateRequest'],
                         ],
                         [
                             'allow' => true,
@@ -91,7 +91,7 @@ class RequestController extends Controller
      */
     public function actionView(int $id)
     {
-        $model=$this->findModel($id);
+        $model = $this->findModel($id);
         $images = $model->requestFiles;
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -110,8 +110,7 @@ class RequestController extends Controller
     public function actionCreate()
     {
         $model = new Request();
-
-        if ( $model->load($this->request->post()) && $model->save()) {
+        if ($model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -131,15 +130,16 @@ class RequestController extends Controller
     {
         $model = $this->findModel($id);
         if (\Yii::$app->user->can('updateRequest', ['model' => $model])) {
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-        }
-        return  $this->redirect(['index']);
+        return $this->redirect(['index']);
     }
 
     /**
@@ -150,12 +150,12 @@ class RequestController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete(int $id): Response
-    {$model = $this->findModel($id);
-        if (Yii::$app->user->can('deleteRequest')) {
-            if (Yii::$app->user->getId() == $model->created_by) {
-                $model->delete();
-            }
+    {
+        $model = $this->findModel($id);
+        if (\Yii::$app->user->can('deleteRequest', ['model' => $model])) {
+            $model->delete();
         }
+
         return $this->redirect(['index']);
     }
 
@@ -175,53 +175,8 @@ class RequestController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }
-//        if ($this->request->isPost) {
-//            if ($model->load($this->request->post()) && $model->save()) {
-//                $model->status = Request::STATUS_NEW;
-//                $filesystem = FilesystemAdapter::adapter();
-//                $files = UploadedFile::getInstances($model, 'imageFiles');
-//                foreach ($files as $file) {
-//                    $path = Yii::$app->getSecurity()->generateRandomString(15) . "." . $file->extension;
-//                    $fileStream = fopen($file->tempName, 'r+');
-//                    $filesystem->writeStream('local/' . $path, $fileStream, ['mimeType' => $file->type]);
-//                    $file = new RequestFile();
-//                    $file->request_id = $model->id;
-//                    $file->path_to_file = '@web/uploads/local/' . $path;
-//                    $file->save();
-//                }
-//                $model->save();
-//                if (Yii::$app->user->can('changeRequestStatus')) {
-//                    $model->status = $this->request->post()['Request']['status'];
-//                    $model->save();
-//                }
-//            }
-//             //var_dump($model->imageFiles);
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            $model->loadDefaultValues();
-//        }
 
 
 
 
-//update
-//        if ($this->request->isPost) {
-//            if (Yii::$app->user->can('admin')) {
-//                if ($model->load($this->request->post()) && $model->save()) {
-//                    if (Yii::$app->user->can('changeRequestStatus')) {
-//                        $model->status = $this->request->post()['Request']['status'];
-//                        $model->save();
-//                    }
-//                    return $this->redirect(['view', 'id' => $model->id]);
-//                }
-//                return $this->render('update', [
-//                    'model' => $model,
-//                ]);
-//            }
-//            if (Yii::$app->user->getId() == $model->created_by) {
-//                if ($model->load($this->request->post()) && $model->save()) {
-//                    return $this->redirect(['view', 'id' => $model->id]);
-//                }
-//                return $this->redirect(['index']);
-//            }
-//        }
+

@@ -104,11 +104,9 @@ class PurchaseController extends Controller
     public function actionCreate()
     {
         $model = new Purchase();
-
         if ($model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         $requestList = ArrayHelper::map(Request::find()->all(), 'id', 'id');
 
         return $this->render('create', [
@@ -127,7 +125,6 @@ class PurchaseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

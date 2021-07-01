@@ -10,7 +10,7 @@ class m210607_144756_create_purchase_table extends Migration
     /**
      * {@inheritdoc}
      */
-    public function Up()
+    public function up()
     {
         $this->createTable('{{%purchase}}', [
             'id' => $this->primaryKey(),
@@ -32,7 +32,7 @@ class m210607_144756_create_purchase_table extends Migration
     /**
      * {@inheritdoc}
      */
-    public function Down()
+    public function down()
     {
         $this->dropForeignKey(
             'fk-purchase-request_id',

@@ -10,7 +10,7 @@ $config = [
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
     'components' => [
@@ -49,10 +49,10 @@ $config = [
             ]
         ],
         'rbac-migrate' => [
-            'class'          => \app\commands\RbacMigrateController::class,
-            'migrationPath'  => '@app/migrations/rbac/',
+            'class' => \app\commands\RbacMigrateController::class,
+            'migrationPath' => '@app/migrations/rbac/',
             'migrationTable' => '{{%system_rbac_migration}}',
-            'templateFile'   => '@app/rbac/views/migration.php',
+            'templateFile' => '@app/rbac/views/migration.php',
         ],
     ],
 
