@@ -33,9 +33,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header'=>Yii::t('app','Действия'),
+                'header'=>Yii::t('app','Actions'),
                 'headerOptions' => ['width' => '80'],
-                'template' =>'{view} {update} {delete}{link}',
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'update' => function ($urlUpdate,$model)  {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-screenshot">Update</span>',
+                            $urlUpdate);
+                    },
+                    'delete' => function ($urlDelete,$model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-screenshot">Delete</span>',
+                            $urlDelete);
+                    },
+                    'view' => function ($urlView,$model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-screenshot">View</span>',
+                            $urlView);
+                    },
+                ],
             ],
         ],
     ]); ?>

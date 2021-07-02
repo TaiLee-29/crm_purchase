@@ -6,14 +6,14 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Request */
-/* @var $images array*/
+/* @var $images array */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Requests'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-$countImg = count($images);
+
 ?>
 <div class="request-view">
 
@@ -40,32 +40,24 @@ $countImg = count($images);
             'created_by',
             'status',
             'created_at',
+            'image_files'=>
+                [
+                    'label' => 'Image',
+                    'format' => 'raw',
+                    'value' => function ($images) {
+                        foreach ($images as $image) {
+                            return Html::img('@web/uploads/'. $image['path_to_file'], [
+                                'alt' => 'yii2 - картинка в gridview',
+                                'style' => 'width:15px;'
+                            ]);
+                        }
+                    },
+                ],
         ],
+
     ]);
 
 
-  ?>
-
-    <?php  if ($countImg == 1){
-        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
-    }
-    else if ($countImg == 2){
-        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
-    }else if ($countImg == 3){
-        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[2]['path_to_file'], ['alt' => 'ewewe']);
-    } else if ($countImg == 4){
-        echo Html::img('@web/uploads/'.$images[0]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[1]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[2]['path_to_file'], ['alt' => 'ewewe']);
-        echo Html::img('@web/uploads/'.$images[3]['path_to_file'], ['alt' => 'ewewe']);
-    } else{
-        echo 'no images for this request';
-    }?>
-
-
-
+    ?>
 
 </div>

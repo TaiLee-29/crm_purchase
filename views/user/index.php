@@ -9,6 +9,9 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
+$urlUpdate = 'request/update';
+$urlDelete = 'request/delete';
+$urlView = 'request/view';
 ?>
 <div class="user-index">
 

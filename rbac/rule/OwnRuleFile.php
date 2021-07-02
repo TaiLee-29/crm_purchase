@@ -15,7 +15,6 @@ class OwnRuleFile extends Rule
      */
         public function execute($user, $item, $params)
     {
-
             return isset($params['model']) && $params['model']->request_id == \Yii::$app->user;
     }
 }

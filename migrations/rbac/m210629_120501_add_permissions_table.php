@@ -59,12 +59,10 @@ class m210629_120501_add_permissions_table extends Migration
 
         $deletePurchase = $this->auth->createPermission('deletePurchase');
         $deletePurchase->description = 'Delete Purchase';
-        $deletePurchase->ruleName = $rule->name;
         $this->auth->add($deletePurchase);
 
         $updatePurchase = $this->auth->createPermission('updatePurchase');
-        $updatePurchase->description = 'Update Request';
-        $updatePurchase->ruleName = $rule->name;
+        $updatePurchase->description = 'Update Purchase';
         $this->auth->add($updatePurchase);
 
         $this->auth->addChild($admin, $createRequest);
