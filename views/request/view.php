@@ -45,8 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Image',
                     'format' => 'raw',
                     'value' => function ($images) {
-                        foreach ($images as $image) {
-                            return Html::img('@web/uploads/'. $image['path_to_file'], [
+                        foreach ($images as $value) {
+                            var_dump($images);exit();
+                            return Html::img('@web/uploads/'. $value['path_to_file'], [
                                 'alt' => 'yii2 - картинка в gridview',
                                 'style' => 'width:15px;'
                             ]);
