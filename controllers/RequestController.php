@@ -51,7 +51,7 @@ class RequestController extends Controller
                             'allow' => true,
                             'actions' => ['update'],
                             'roles' => ['UpdateRequest'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['model' => Request::findOne(Yii::$app->request->get('id'))];
                             },
                         ],
@@ -59,7 +59,7 @@ class RequestController extends Controller
                             'allow' => true,
                             'actions' => ['delete'],
                             'roles' => ['deleteRequest'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['model' => Request::findOne(Yii::$app->request->get('id'))];
                             },
                         ],
@@ -133,7 +133,7 @@ class RequestController extends Controller
     {
         $model = $this->findModel($id);
         if (\Yii::$app->user->can('updateRequest', ['model' => $model])) {
-            if ( $model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
