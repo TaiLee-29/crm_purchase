@@ -40,18 +40,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_by',
             'status',
             'created_at',
-            'image_files'=>
+            'image_files' =>
                 [
-                    'label' => 'Image',
+                    'label' => 'Images',
                     'format' => 'raw',
-                    'value' => function ($images) {
-                        foreach ($images as $value) {
-                            var_dump($images);exit();
-                            return Html::img('@web/uploads/'. $value['path_to_file'], [
+                    'value' => function (\app\models\Request $model) {
+                        $html = '';
+                        foreach ($model->requestFiles as $file) {
+                            $html .= Html::img('@web/uploads/' . $file->path_to_file, [
                                 'alt' => 'yii2 - картинка в gridview',
-                                'style' => 'width:15px;'
+                                'style' => 'width:180px;height:190px;'
                             ]);
                         }
+                        return $html;
                     },
                 ],
         ],
