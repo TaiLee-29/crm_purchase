@@ -98,12 +98,8 @@ class RequestController extends Controller
     public function actionView(int $id)
     {
         $model = $this->findModel($id);
-        $images = $model->requestFiles;
-
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'images' => $images,
-
+            'model' => $model,
         ]);
     }
 

@@ -89,10 +89,8 @@ class PurchaseController extends Controller
     public function actionView(int $id)
     {
         $model = $this->findModel($id);
-        $images = $model->request->requestFiles;
         return $this->render('view', [
             'model' => $model,
-            'images' => $images
         ]);
     }
 
